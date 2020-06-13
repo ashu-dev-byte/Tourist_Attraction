@@ -1,0 +1,13 @@
+<%- include("./partials/header.ejs") %>
+<h1>Create a new Tourist Location</h1>
+
+<form action="/touristspots" method="POST">
+  <label for="name">EnterName: </label>
+  <input type="text" name="name" />
+  <label for="imageURL">Enter Image URL:</label>
+  <input type="text" name="imageURL" />
+  <button>Submit</button>
+</form>
+<a href="/touristspots">Go Back</a>
+
+<%- include("./partials/footer.ejs") %>

@@ -1,0 +1,45 @@
+<%- include("./partials/header") %>
+
+<div class="container">
+  <header class="jumbotron">
+    <div class="container">
+      <h1>Welcome to Tourist Locations!</h1>
+      <p>View our handpicked Tourist Locations from all over the world.</p>
+      <p>
+        <a class="btn btn-lg btn-primary" href="/touristspots/new">
+          Add New Tourist Spot
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Our Most Popular Destinations</h3>
+    </div>
+
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+      <% tspots.forEach((tspot) => { %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card" style="height: 240px; margin: 10px auto;">
+          <img
+            class="card-img-top"
+            src="<%= tspot.imageURL %>"
+            style="
+              height: 62.5%;
+              object-fit: cover;
+              padding: 3px;
+              border-radius: 5px;
+            "
+          />
+          <div class="card-body">
+            <h4 class="card-title"><%= tspot.name %></h4>
+          </div>
+        </div>
+      </div>
+      <%}); %>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer") %>

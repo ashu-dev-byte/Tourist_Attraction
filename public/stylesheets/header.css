@@ -1,0 +1,42 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.navbar-brand {
+  height: 7vh !important;
+}
+
+.nav-item {
+  font-size: 1.3rem;
+  padding: 0rem 0.7rem;
+}
+
+.navbar-brand {
+  position: relative;
+  top: 2.5px;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: rgba(255, 123, 0, 0.945) !important;
+}
+
+.navbar-nav li a {
+  color: orange !important;
+}
+
+.form-control {
+  background-color: dimgray;
+  border: none;
+  width: 9.2rem !important;
+  transition: width 0.4s ease-in-out;
+}
+
+input::placeholder {
+  font-size: 1.2rem !important;
+  color: orange !important;
+}
+
+.form-control:focus {
+  width: 23rem !important;
+}
