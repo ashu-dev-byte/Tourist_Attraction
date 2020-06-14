@@ -13,7 +13,7 @@
   padding: 0rem 0.7rem;
 }
 
-.navbar-brand {
+.navbar > .navbar-brand {
   position: relative;
   top: 2.5px;
   font-size: 1.7rem;
@@ -25,18 +25,19 @@
   color: orange !important;
 }
 
-.form-control {
+.apex > .form-control {
   background-color: dimgray;
   border: none;
   width: 9.2rem !important;
   transition: width 0.4s ease-in-out;
 }
 
-input::placeholder {
+.apex > input::placeholder {
   font-size: 1.2rem !important;
   color: orange !important;
 }
 
-.form-control:focus {
+.apex > .form-control:focus {
+  background-color: rgb(252, 243, 229);
   width: 23rem !important;
 }

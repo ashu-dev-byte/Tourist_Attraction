@@ -45,7 +45,7 @@ app.post("/touristspots", (req, res) => {
 });
 
 app.get("/touristspots/new", (req, res) => {
-  res.render("new");
+  res.render("newSpot");
 });
 
 app.get("*", (req, res) => {
