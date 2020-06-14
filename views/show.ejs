@@ -1,0 +1,44 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="continer">
+  <header class="jumbotron" style="height: 24.5%;">
+    <div class="container">
+      <h1>Welcome to Tourist Locations!</h1>
+      <p>View our handpicked Tourist Locations from all over the world.</p>
+      <p>
+        <a class="btn btn-lg btn-warning" href="/touristspots/new">
+          Add New Tourist Spot
+        </a>
+        <a class="btn btn-lg btn-primary" href="/touristspots"
+          >View Tourist Spots</a
+        >
+      </p>
+    </div>
+  </header>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 style="text-align: center;"><%= specificSpot.name %></h4>
+    </div>
+    <div class="col-12">
+      <img
+        src="<%= specificSpot.imageURL %>"
+        style="
+          width: 20%;
+          object-fit: cover;
+          padding: 3px;
+          border-radius: 5px;
+          display: block;
+          margin: auto;
+        "
+      />
+    </div>
+    <div class="col-12">
+      <p style="text-align: justify; margin: 30px 295px;">
+        <%= specificSpot.description %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

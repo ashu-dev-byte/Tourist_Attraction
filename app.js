@@ -10,6 +10,7 @@ app.set("view engine", "ejs");
 const tspotSchema = new mongoose.Schema({
   name: String,
   imageURL: String,
+  description: String,
 });
 
 const tspot = mongoose.model("tspot", tspotSchema);
@@ -23,7 +24,7 @@ app.get("/touristspots", (req, res) => {
     if (err) {
       console.log("Some error occured while traversing database!");
     } else {
-      res.render("touristspots", { tspots: allTSpots });
+      res.render("index", { tspots: allTSpots });
     }
   });
 });
@@ -31,7 +32,8 @@ app.get("/touristspots", (req, res) => {
 app.post("/touristspots", (req, res) => {
   let name = req.body.name;
   let imageURL = req.body.imageURL;
-  let newSpot = { name: name, imageURL: imageURL };
+  let description = req.body.description;
+  let newSpot = { name: name, imageURL: imageURL, description: description };
 
   tspot.create(newSpot, (err, newTSpot) => {
     if (err) {
@@ -46,6 +48,16 @@ app.post("/touristspots", (req, res) => {
 
 app.get("/touristspots/new", (req, res) => {
   res.render("newSpot");
+});
+
+app.get("/touristspots/:id", (req, res) => {
+  tspot.findById(req.params.id, (err, specificSpot) => {
+    if (err) {
+      console.log("Some error occured while showing this tSpot.");
+    } else {
+      res.render("show", { specificSpot: specificSpot });
+    }
+  });
 });
 
 app.get("*", (req, res) => {
