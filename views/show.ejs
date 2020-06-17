@@ -1,15 +1,18 @@
 <%- include("./partials/header.ejs") %>
 
 <div class="continer">
-  <header class="jumbotron" style="height: 24.5%;">
+  <header class="jumbotron">
     <div class="container">
-      <h1>Welcome to Tourist Locations!</h1>
+      <h1>Welcome to Exploration Point!</h1>
       <p>View our handpicked Tourist Locations from all over the world.</p>
       <p>
         <a class="btn btn-lg btn-warning" href="/touristspots/new">
           Add New Tourist Spot
         </a>
-        <a class="btn btn-lg btn-primary" href="/touristspots"
+        <a
+          class="btn btn-lg btn-primary"
+          href="/touristspots"
+          style="margin-top: 10px;"
           >View Tourist Spots</a
         >
       </p>
@@ -18,7 +21,12 @@
 
   <div class="row">
     <div class="col-12">
-      <h4 style="text-align: center;"><%= specificSpot.name %></h4>
+      <h4 style="text-align: center;">
+        <strong><%= specificSpot.name %></strong>,
+        <span style="color: rgba(255, 123, 0, 0.945); font-weight: normal;">
+          <%= specificSpot.city %>
+        </span>
+      </h4>
     </div>
     <div class="col-12">
       <img
@@ -34,7 +42,7 @@
       />
     </div>
     <div class="col-12">
-      <p style="text-align: justify; margin: 30px 295px;">
+      <p style="text-align: justify; margin: 7.5% 7.5%;">
         <%= specificSpot.description %>
       </p>
     </div>

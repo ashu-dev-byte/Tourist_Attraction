@@ -3,11 +3,14 @@
 <div class="container">
   <header class="jumbotron">
     <div class="container">
-      <h1>Welcome to Tourist Locations!</h1>
-      <p>View our handpicked Tourist Locations from all over the world.</p>
+      <h1>Welcome to Exploration Point!</h1>
+      <p>
+        View the handpicked locations from the posts of our various users and
+        see whose explorations matches with yours.
+      </p>
       <p>
         <a class="btn btn-lg btn-warning" href="/touristspots/new">
-          Add New Tourist Spot
+          Add New Exploration Point
         </a>
       </p>
     </div>
@@ -23,7 +26,7 @@
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div
           class="card"
-          style="height: 345px; width: 285px; margin: 10px 10px;"
+          style="height: 345px; width: 285px; margin: 10px 15px;"
         >
           <img
             class="card-img-top"
@@ -37,9 +40,22 @@
           />
           <div class="card-body">
             <h4 class="card-title"><%= tspot.name %></h4>
+            <p
+              class="card-text text-center"
+              style="
+                color: dodgerblue;
+                font-size: 16.6px;
+                font-weight: bold;
+                font-style: italic;
+                margin-top: -10px;
+              "
+            >
+              <%= tspot.city %>
+            </p>
             <a
               href="/touristspots/<%= tspot._id %>"
               class="btn btn-warning btn-block"
+              style="position: absolute; width: 85%; bottom: 15px;"
               >More info</a
             >
           </div>

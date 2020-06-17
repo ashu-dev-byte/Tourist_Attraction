@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 
 const tspotSchema = new mongoose.Schema({
   name: String,
+  city: String,
   imageURL: String,
   description: String,
 });
@@ -31,9 +32,15 @@ app.get("/touristspots", (req, res) => {
 
 app.post("/touristspots", (req, res) => {
   let name = req.body.name;
+  let city = req.body.city;
   let imageURL = req.body.imageURL;
   let description = req.body.description;
-  let newSpot = { name: name, imageURL: imageURL, description: description };
+  let newSpot = {
+    name: name,
+    city: city,
+    imageURL: imageURL,
+    description: description,
+  };
 
   tspot.create(newSpot, (err, newTSpot) => {
     if (err) {

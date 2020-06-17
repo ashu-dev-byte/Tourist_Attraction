@@ -2,16 +2,41 @@
 
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-12 col-md-6">
-      <h1 style="text-align: center;">Create a new Tourist Location</h1>
+    <div class="col-12 col-md-6 justify-content-center align-items-center">
+      <h1
+        style="
+          font-size: 48px;
+          white-space: nowrap;
+          margin: 25px 0px;
+          position: relative;
+          left: -11%;
+          color: rgb(255, 166, 0);
+        "
+      >
+        Create a new Exploration Point
+      </h1>
 
       <form action="/touristspots" method="POST">
         <div class="form-group">
-          <label for="name">EnterName: </label>
+          <label for="name">Enter Name: </label>
           <input
             class="form-control"
             type="text"
             name="name"
+            maxlength="35"
+            autocomplete="off"
+          />
+          <span style="margin-left: 10px; font-size: 14.5px; color: gainsboro;"
+            >Max limit : 35 characters</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="city">Enter City:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="city"
+            maxlength="35"
             autocomplete="off"
           />
         </div>
@@ -26,13 +51,12 @@
         </div>
         <div class="form-group">
           <label for="description">Enter Description:</label>
-          <input
+          <textarea
             class="form-control"
-            type="text"
             name="description"
             autocomplete="off"
-            style="height: 95px;"
-          />
+            style="height: 125px;"
+          ></textarea>
         </div>
         <div class="form-group">
           <button class="btn-lg btn-primary btn-block">Submit</button>
@@ -43,7 +67,7 @@
         class="row justify-content-center align-items-center"
         style="margin: 12px auto;"
       >
-        <a class="btn btn-warning" href="/touristspots">Go Back</a>
+        <a class="btn btn-danger" href="/touristspots">Go Back</a>
       </div>
     </div>
   </div>
