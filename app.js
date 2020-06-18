@@ -1,20 +1,16 @@
+const comment = require("./models/comment");
 const bodyParser = require("body-parser");
+const tspot = require("./models/tspot");
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+const seedDB = require("./seeds");
+seedDB();
+
 mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-
-const tspotSchema = new mongoose.Schema({
-  name: String,
-  city: String,
-  imageURL: String,
-  description: String,
-});
-
-const tspot = mongoose.model("tspot", tspotSchema);
 
 app.get("/", (req, res) => {
   res.render("landing");
@@ -58,13 +54,19 @@ app.get("/touristspots/new", (req, res) => {
 });
 
 app.get("/touristspots/:id", (req, res) => {
-  tspot.findById(req.params.id, (err, specificSpot) => {
-    if (err) {
-      console.log("Some error occured while showing this tSpot.");
-    } else {
-      res.render("show", { specificSpot: specificSpot });
-    }
-  });
+  tspot
+    .findById(req.params.id)
+    .populate("comments")
+    .exec((err, specificSpot) => {
+      if (err) {
+        console.log("Some error occured while showing this tSpot.\n" + err);
+        console.log(specificSpot);
+      } else {
+        console.log("Rendered this tSpot.\n");
+        console.log(specificSpot);
+        res.render("show", { specificSpot: specificSpot });
+      }
+    });
 });
 
 app.get("*", (req, res) => {

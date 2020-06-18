@@ -6,7 +6,11 @@
       <h1>Welcome to Exploration Point!</h1>
       <p>View our handpicked Tourist Locations from all over the world.</p>
       <p>
-        <a class="btn btn-lg btn-warning" href="/touristspots/new">
+        <a
+          class="btn btn-lg btn-warning"
+          href="/touristspots/new"
+          style="margin-top: 10px;"
+        >
           Add New Tourist Spot
         </a>
         <a
@@ -32,7 +36,7 @@
       <img
         src="<%= specificSpot.imageURL %>"
         style="
-          width: 20%;
+          width: 50%;
           object-fit: cover;
           padding: 3px;
           border-radius: 5px;
@@ -41,12 +45,26 @@
         "
       />
     </div>
+  </div>
+
+  <div class="row">
     <div class="col-12">
-      <p style="text-align: justify; margin: 7.5% 7.5%;">
+      <p style="text-align: justify; margin: 7.5% 13.5%;">
         <%= specificSpot.description %>
       </p>
     </div>
   </div>
-</div>
 
-<%- include("./partials/footer.ejs") %>
+  <div class="row">
+    <div class="col-12">
+      <% specificSpot.comments.forEach((comment) => { %>
+      <h5 style="position: relative; left: 10%;">Comment:</h5>
+      <p style="position: relative; left: 10%;">
+        <strong><%= comment.author %></strong> - <%= comment.text%>
+      </p>
+      <% }) %>
+    </div>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+</div>
