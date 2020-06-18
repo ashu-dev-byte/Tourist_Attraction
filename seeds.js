@@ -33,6 +33,7 @@ function seedDB() {
           }
         });
       });
+      console.log("Adding Database...");
     }
   });
 }

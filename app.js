@@ -1,16 +1,16 @@
-const comment = require("./models/comment");
 const bodyParser = require("body-parser");
+const comment = require("./models/comment");
 const tspot = require("./models/tspot");
 const mongoose = require("mongoose");
 const express = require("express");
-const app = express();
 const seedDB = require("./seeds");
-seedDB();
+const app = express();
 
 mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+seedDB();
 
 app.get("/", (req, res) => {
   res.render("landing");
@@ -21,7 +21,7 @@ app.get("/touristspots", (req, res) => {
     if (err) {
       console.log("Some error occured while traversing database!");
     } else {
-      res.render("index", { tspots: allTSpots });
+      res.render("touristspots/index", { tspots: allTSpots });
     }
   });
 });
@@ -50,7 +50,7 @@ app.post("/touristspots", (req, res) => {
 });
 
 app.get("/touristspots/new", (req, res) => {
-  res.render("newSpot");
+  res.render("touristspots/newSpot");
 });
 
 app.get("/touristspots/:id", (req, res) => {
@@ -64,9 +64,40 @@ app.get("/touristspots/:id", (req, res) => {
       } else {
         console.log("Rendered this tSpot.\n");
         console.log(specificSpot);
-        res.render("show", { specificSpot: specificSpot });
+        res.render("touristspots/show", { specificSpot: specificSpot });
       }
     });
+});
+
+app.get("/touristspots/:id/comments/new", (req, res) => {
+  tspot.findById(req.params.id, (err, foundTspot) => {
+    if (err) {
+      console.log("Error while showing add comment page!" + err);
+    } else {
+      tspot.findById(req.params.id, (err, foundTspot) => {
+        res.render("comments/new", { specificSpot: foundTspot });
+      });
+    }
+  });
+});
+
+app.post("/touristspots/:id/comments", (req, res) => {
+  tspot.findById(req.params.id, (err, foundTspot) => {
+    if (err) {
+      console.log("Error while adding comment!" + err);
+      res.redirect("/touristspots/:id");
+    } else {
+      comment.create(req.body.comment, (err, com) => {
+        if (err) {
+          console.log(err);
+        } else {
+          foundTspot.comments.push(com);
+          foundTspot.save();
+          res.redirect(`/touristspots/${foundTspot._id}`);
+        }
+      });
+    }
+  });
 });
 
 app.get("*", (req, res) => {

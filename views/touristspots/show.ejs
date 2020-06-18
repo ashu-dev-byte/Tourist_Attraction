@@ -1,4 +1,4 @@
-<%- include("./partials/header.ejs") %>
+<%- include("../partials/header.ejs") %>
 
 <div class="continer">
   <header class="jumbotron">
@@ -57,14 +57,24 @@
 
   <div class="row">
     <div class="col-12">
+      <h2 style="position: relative; left: 10%; color: rgb(0, 140, 255);">
+        Comments:
+      </h2>
       <% specificSpot.comments.forEach((comment) => { %>
-      <h5 style="position: relative; left: 10%;">Comment:</h5>
       <p style="position: relative; left: 10%;">
         <strong><%= comment.author %></strong> - <%= comment.text%>
       </p>
       <% }) %>
     </div>
+    <div class="col-12">
+      <a
+        class="btn btn-sm btn-outline-primary"
+        style="position: relative; left: 10%;"
+        href="/touristspots/<%= specificSpot._id %>/comments/new"
+        >Add Comment</a
+      >
+    </div>
   </div>
 
-  <%- include("./partials/footer.ejs") %>
+  <%- include("../partials/footer.ejs") %>
 </div>
