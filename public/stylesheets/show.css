@@ -36,3 +36,9 @@ img {
 .list-group > .list-group-item {
   cursor: pointer;
 }
+
+.right-side {
+  position: relative;
+  top: 1.8px;
+  color: #cc5500;
+}
