@@ -1,0 +1,38 @@
+.anchor-buttons > a {
+  margin-top: 10px;
+}
+
+img {
+  object-fit: cover;
+}
+
+.city-name {
+  color: dodgerblue;
+  font-size: 16.6px;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: -10px;
+}
+
+.review-card {
+  margin-top: 2em;
+}
+
+.review-card > .card-body > a {
+  width: 205px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.auth-name {
+  color: #cc5500;
+  font-size: 18px;
+}
+
+.lead {
+  font-size: 1.8em;
+}
+
+.list-group > .list-group-item {
+  cursor: pointer;
+}

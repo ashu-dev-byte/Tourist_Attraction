@@ -8,18 +8,11 @@
         View the handpicked locations from the posts of our various users and
         see whose explorations matches with yours.
       </p>
-      <p>
-        <a
-          class="btn btn-lg btn-warning"
-          href="/touristspots/new"
-          style="margin-top: 10px;"
-        >
+      <p class="anchor-buttons">
+        <a class="btn btn-lg btn-warning" href="/touristspots/new">
           Add New Tourist Spot
         </a>
-        <a
-          class="btn btn-lg btn-primary"
-          href="/touristspots"
-          style="margin-top: 10px;"
+        <a class="btn btn-lg btn-primary" href="/touristspots"
           >View Tourist Spots</a
         >
       </p>
@@ -32,46 +25,32 @@
     <div class="row">
       <div class="col-md-9">
         <div class="card">
-          <img
-            class="card-img-top"
-            src="<%= specificSpot.imageURL %>"
-            style="object-fit: cover; padding: 3px; border-radius: 5px;"
-          />
+          <img class="card-img-top" src="<%= specificSpot.imageURL %>" />
           <div class="card-body">
             <h4 class="float-right">₹350.00/day</h4>
             <h4 class="card-title"><%= specificSpot.name %></h4>
-            <p
-              class="card-text"
-              style="
-                color: dodgerblue;
-                font-size: 16.6px;
-                font-weight: bold;
-                font-style: italic;
-                margin-top: -10px;
-              "
-            >
+            <p class="card-text city-name">
               <%= specificSpot.city %>
             </p>
             <p class="card-text"><%= specificSpot.description %></p>
           </div>
         </div>
-        <div class="card bg-light" style="margin-top: 2em;">
+        <div class="card bg-light review-card">
           <div class="card-body">
             <a
               class="btn btn-success float-right"
-              style="width: 205px; font-size: 18px; font-weight: bold;"
               href="/touristspots/<%= specificSpot._id %>/comments/new"
               >Leave Review</a
             >
-            <br /><br /><br /><br />
+            <br /><br />
+            <hr />
+            <br />
 
             <% specificSpot.comments.forEach((comment) => { %>
             <div class="row">
               <div class="col-md-12">
                 <span class="float-right">7 days ago</span>
-                <strong style="color: #cc5500; font-size: 18px;"
-                  ><%= comment.author %>:</strong
-                >
+                <strong class="auth-name"><%= comment.author %>:</strong>
                 <p><%= comment.text %></p>
               </div>
             </div>
@@ -80,38 +59,15 @@
         </div>
       </div>
       <div class="col-md-3">
-        <p class="lead" style="font-size: 1.8em;">Exploration Point</p>
-        <div class="list-group" style="width: 100%;">
-          <li class="list-group-item active" style="cursor: pointer;">
-            Info 1
-          </li>
-          <li class="list-group-item" style="cursor: pointer;">Info 2</li>
-          <li class="list-group-item" style="cursor: pointer;">Info 3</li>
+        <p class="lead">Exploration Point</p>
+        <div class="list-group">
+          <li class="list-group-item active">Info 1</li>
+          <li class="list-group-item">Info 2</li>
+          <li class="list-group-item">Info 3</li>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="row">
-    <div class="col-12">
-      <h2 style="position: relative; left: 10%; color: rgb(0, 140, 255);">
-        Comments:
-      </h2>
-      <% specificSpot.comments.forEach((comment) => { %>
-      <p style="position: relative; left: 10%;">
-        <strong><%= comment.author %></strong> - <%= comment.text%>
-      </p>
-      <% }) %>
-    </div>
-    <div class="col-12">
-      <a
-        class="btn btn-sm btn-outline-primary"
-        style="position: relative; left: 10%;"
-        href="/touristspots/<%= specificSpot._id %>/comments/new"
-        >Add Comment</a
-      >
-    </div>
-  </div> -->
 
 <%- include("../partials/footer.ejs") %>
