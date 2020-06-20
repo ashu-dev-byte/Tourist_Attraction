@@ -1,5 +1,6 @@
 const bodyParser = require("body-parser");
 const comment = require("./models/comment");
+const expressSanitizer = require("express-sanitizer");
 const tspot = require("./models/tspot");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -8,6 +9,7 @@ const app = express();
 
 mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 seedDB();
@@ -30,7 +32,7 @@ app.post("/touristspots", (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
   let imageURL = req.body.imageURL;
-  let description = req.body.description;
+  let description = req.sanitize(req.body.description);
   let newSpot = {
     name: name,
     city: city,
@@ -87,6 +89,7 @@ app.post("/touristspots/:id/comments", (req, res) => {
       console.log("Error while adding comment!" + err);
       res.redirect("/touristspots/:id");
     } else {
+      req.body.comment.text = req.sanitize(req.body.comment.text);
       comment.create(req.body.comment, (err, com) => {
         if (err) {
           console.log(err);

@@ -32,7 +32,7 @@
             <p class="card-text city-name">
               <%= specificSpot.city %>
             </p>
-            <p class="card-text"><%= specificSpot.description %></p>
+            <p class="card-text"><%- specificSpot.description %></p>
           </div>
         </div>
         <div class="card review-card">
@@ -51,7 +51,7 @@
               <div class="col-md-12">
                 <span class="float-right">7 days ago</span>
                 <strong class="auth-name"><%= comment.author %>:</strong>
-                <p><%= comment.text %></p>
+                <p><%- comment.text %></p>
               </div>
             </div>
             <% }) %>
