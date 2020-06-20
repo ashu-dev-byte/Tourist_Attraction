@@ -8,6 +8,7 @@ const user = require("./models/user");
 const mongoose = require("mongoose");
 const express = require("express");
 const seedDB = require("./seeds");
+const { use, Authenticator } = require("passport");
 const app = express();
 
 mongoose.connect("mongodb://localhost/touristSpots");
@@ -16,6 +17,21 @@ app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 seedDB();
+
+// Passport Configuration====================
+app.use(
+  require("express-session")({
+    secret: "One day, Luffy will become the Pirate King!!",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+// END========================================
 
 app.get("/", (req, res) => {
   res.render("landing");
@@ -103,6 +119,26 @@ app.post("/touristspots/:id/comments", (req, res) => {
         }
       });
     }
+  });
+});
+
+// Authentication Routes====================================
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.post("/register", (req, res) => {
+  const newUser = new user({ username: req.body.username });
+  user.register(newUser, req.body.password, (err, createdUser) => {
+    if (err) {
+      console.log(err);
+      return res.render("register");
+    }
+
+    passport.authenticate("local")(req, res, () => {
+      console.log(createdUser);
+      res.redirect("/");
+    });
   });
 });
 
