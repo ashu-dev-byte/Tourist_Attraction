@@ -10,10 +10,10 @@
       </p>
       <p class="anchor-buttons">
         <a class="btn btn-lg btn-warning" href="/touristspots/new">
-          Add New Tourist Spot
+          Add Exploration Point
         </a>
         <a class="btn btn-lg btn-primary" href="/touristspots"
-          >View Tourist Spots</a
+          >View Exploration Points</a
         >
       </p>
     </div>
@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <div class="card">
+        <div class="card main-card">
           <img class="card-img-top" src="<%= specificSpot.imageURL %>" />
           <div class="card-body">
             <h5 class="float-right right-side">Open Daily</h5>
@@ -35,7 +35,7 @@
             <p class="card-text"><%= specificSpot.description %></p>
           </div>
         </div>
-        <div class="card bg-light review-card">
+        <div class="card review-card">
           <div class="card-body">
             <a
               class="btn btn-success float-right"

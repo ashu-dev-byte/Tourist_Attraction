@@ -14,8 +14,14 @@ img {
   margin-top: -10px;
 }
 
+.main-card {
+  background-color: #e5cfe9;
+}
+
 .review-card {
   margin-top: 2em;
+  background-color: #eddef0;
+  /* background-color: #e5cfe9; */
 }
 
 .review-card > .card-body > a {

@@ -10,7 +10,7 @@ mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-//seedDB();
+seedDB();
 
 app.get("/", (req, res) => {
   res.render("landing");
