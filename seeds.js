@@ -8,7 +8,7 @@ const cmt = {
 };
 
 function seedDB() {
-  tspot.remove({}, (err) => {
+  tspot.deleteMany({}, (err) => {
     if (err) {
       console.log("Error occured while emptying database!");
     } else {
