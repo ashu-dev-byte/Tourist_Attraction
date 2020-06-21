@@ -31,13 +31,18 @@ app.use(passport.session());
 passport.use(new localStrategy(user.authenticate()));
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 // END========================================
 
 app.get("/", (req, res) => {
   res.render("landing");
 });
 
-app.get("/touristspots", (req, res) => {
+app.get("/touristspots", isLoggedIn, (req, res) => {
   tspot.find({}, (err, allTSpots) => {
     if (err) {
       console.log("Some error occured while traversing database!");
@@ -47,7 +52,7 @@ app.get("/touristspots", (req, res) => {
   });
 });
 
-app.post("/touristspots", (req, res) => {
+app.post("/touristspots", isLoggedIn, (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
   let imageURL = req.body.imageURL;
@@ -59,7 +64,7 @@ app.post("/touristspots", (req, res) => {
     description: description,
   };
 
-  tspot.create(newSpot, (err, newTSpot) => {
+  tspot.create(newSpot, isLoggedIn, (err, newTSpot) => {
     if (err) {
       console.log("Some error occured while adding newTSpot to database!");
     } else {
@@ -70,11 +75,11 @@ app.post("/touristspots", (req, res) => {
   res.redirect("/touristspots");
 });
 
-app.get("/touristspots/new", (req, res) => {
+app.get("/touristspots/new", isLoggedIn, (req, res) => {
   res.render("touristspots/newSpot");
 });
 
-app.get("/touristspots/:id", (req, res) => {
+app.get("/touristspots/:id", isLoggedIn, (req, res) => {
   tspot
     .findById(req.params.id)
     .populate("comments")
@@ -90,7 +95,7 @@ app.get("/touristspots/:id", (req, res) => {
     });
 });
 
-app.get("/touristspots/:id/comments/new", (req, res) => {
+app.get("/touristspots/:id/comments/new", isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
       console.log("Error while showing add comment page!" + err);
@@ -102,13 +107,14 @@ app.get("/touristspots/:id/comments/new", (req, res) => {
   });
 });
 
-app.post("/touristspots/:id/comments", (req, res) => {
+app.post("/touristspots/:id/comments", isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
       console.log("Error while adding comment!" + err);
       res.redirect("/touristspots/:id");
     } else {
       req.body.comment.text = req.sanitize(req.body.comment.text);
+      req.body.comment.author = res.locals.currentUser.username;
       comment.create(req.body.comment, (err, com) => {
         if (err) {
           console.log(err);
@@ -142,9 +148,34 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/touristspots",
+    failureRedirect: "/",
+  }),
+  (req, res) => {}
+);
+
+app.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/touristspots");
+});
+
 app.get("*", (req, res) => {
   res.send("<h3>This root has not been defined</h3>");
 });
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 app.listen(3000, () => {
   console.log("The server has started at port 3000.");

@@ -25,6 +25,14 @@
   color: orange !important;
 }
 
+.user-nav {
+  font-style: italic;
+  font-weight: bolder;
+  background: -webkit-linear-gradient(45deg, orange, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .apex > .form-control {
   background-color: dimgray;
   border: none;
