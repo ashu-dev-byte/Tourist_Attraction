@@ -6,9 +6,8 @@ const comment = require("./models/comment");
 const tspot = require("./models/tspot");
 const user = require("./models/user");
 const mongoose = require("mongoose");
-const express = require("express");
 const seedDB = require("./seeds");
-const { use, Authenticator } = require("passport");
+const express = require("express");
 const app = express();
 
 mongoose.connect("mongodb://localhost/touristSpots");
@@ -16,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-seedDB();
+//seedDB();
 
 // Passport Configuration====================
 app.use(
