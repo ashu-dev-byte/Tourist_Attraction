@@ -1,11 +1,11 @@
 const comment = require("./models/comment");
 const tspot = require("./models/tspot");
 const data = require("./seedData");
-const mongoose = require("mongoose");
-const cmt = {
-  text: "This place is awesome. I always visit here in summers!!",
-  author: "Ironman",
-};
+// const mongoose = require("mongoose");
+// const cmt = {
+//   text: "This place is awesome. I always visit here in summers!!",
+//   author: "Ironman",
+// };
 
 function seedDB() {
   tspot.deleteMany({}, (err) => {
@@ -20,16 +20,16 @@ function seedDB() {
           } else {
             console.log("Added a exploration point");
 
-            comment.create(cmt, (err, com) => {
-              if (err) {
-                console.log("Error while seeding comment!");
-              } else {
-                datum.comments.push(com);
-                datum.save();
-                console.log("Added a comment!");
-                //console.log(datum);
-              }
-            });
+            // comment.create(cmt, (err, com) => {
+            //   if (err) {
+            //     console.log("Error while seeding comment!");
+            //   } else {
+            //     datum.comments.push(com);
+            //     datum.save();
+            //     console.log("Added a comment!");
+            //     //console.log(datum);
+            //   }
+            // });
           }
         });
       });

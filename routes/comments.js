@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const tspot = require("../models/tspot");
-const comment = require("../models/comment");
+const commentDB = require("../models/comment");
 
 router.get("/new", isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
@@ -21,14 +21,17 @@ router.post("/", isLoggedIn, (req, res) => {
       console.log("Error while adding comment!" + err);
       res.redirect("/touristspots/:id");
     } else {
-      req.body.comment.text = req.sanitize(req.body.comment.text);
-      req.body.comment.author = res.locals.currentUser.username;
-      comment.create(req.body.comment, (err, com) => {
+      commentDB.create(req.body.comment, (err, comment) => {
         if (err) {
           console.log(err);
         } else {
-          foundTspot.comments.push(com);
+          comment.author.id = req.user._id;
+          comment.author.username = req.user.username;
+          comment.text = req.sanitize(req.body.commentText);
+          comment.save();
+          foundTspot.comments.push(comment);
           foundTspot.save();
+          // console.log(comment);
           res.redirect(`/touristspots/${foundTspot._id}`);
         }
       });
