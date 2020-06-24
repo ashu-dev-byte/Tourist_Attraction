@@ -8,6 +8,13 @@ img {
 
 .city-name {
   color: dodgerblue;
+  font-size: 19.6px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.sub-by-name {
+  color: green;
   font-size: 16.6px;
   font-weight: bold;
   font-style: italic;

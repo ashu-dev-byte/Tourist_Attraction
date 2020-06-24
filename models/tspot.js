@@ -5,6 +5,13 @@ const tspotSchema = new mongoose.Schema({
   city: String,
   imageURL: String,
   description: String,
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+    username: String,
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

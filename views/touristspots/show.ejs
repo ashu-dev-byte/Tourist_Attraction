@@ -28,9 +28,12 @@
           <img class="card-img-top" src="<%= specificSpot.imageURL %>" />
           <div class="card-body">
             <h5 class="float-right right-side">Open Daily</h5>
-            <h4 class="card-title"><%= specificSpot.name %></h4>
-            <p class="card-text city-name">
-              <%= specificSpot.city %>
+            <h4 class="card-title">
+              <%= specificSpot.name %>,
+              <span class="city-name"><%= specificSpot.city %></span>
+            </h4>
+            <p class="card-text sub-by-name">
+              Submitted by <%= specificSpot.author.username %>
             </p>
             <p class="card-text"><%- specificSpot.description %></p>
           </div>

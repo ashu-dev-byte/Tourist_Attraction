@@ -17,11 +17,16 @@ router.post("/", isLoggedIn, (req, res) => {
   let city = req.body.city;
   let imageURL = req.body.imageURL;
   let description = req.sanitize(req.body.description);
+  var author = {
+    username: req.user.username,
+    id: req.user._id,
+  };
   let newSpot = {
     name: name,
     city: city,
     imageURL: imageURL,
     description: description,
+    author: author,
   };
 
   tspot.create(newSpot, isLoggedIn, (err, newTSpot) => {
@@ -29,7 +34,7 @@ router.post("/", isLoggedIn, (req, res) => {
       console.log("Some error occured while adding newTSpot to database!");
     } else {
       console.log("New Tourist Spot saved to database.");
-      console.log(newTSpot);
+      //console.log(newTSpot);
     }
   });
   res.redirect("/touristspots");
@@ -49,7 +54,7 @@ router.get("/:id", isLoggedIn, (req, res) => {
         console.log(specificSpot);
       } else {
         console.log("Rendered this tSpot.\n");
-        console.log(specificSpot);
+        //console.log(specificSpot);
         res.render("touristspots/show", { specificSpot: specificSpot });
       }
     });

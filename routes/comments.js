@@ -21,14 +21,18 @@ router.post("/", isLoggedIn, (req, res) => {
       console.log("Error while adding comment!" + err);
       res.redirect("/touristspots/:id");
     } else {
-      commentDB.create(req.body.comment, (err, comment) => {
+      let datum = {
+        text: req.sanitize(req.body.commentText),
+        author: {
+          username: req.user.username,
+          id: req.user._id,
+        },
+      };
+
+      commentDB.create(datum, (err, comment) => {
         if (err) {
           console.log(err);
         } else {
-          comment.author.id = req.user._id;
-          comment.author.username = req.user.username;
-          comment.text = req.sanitize(req.body.commentText);
-          comment.save();
           foundTspot.comments.push(comment);
           foundTspot.save();
           // console.log(comment);
