@@ -5,7 +5,9 @@
 }
 
 .navbar-brand {
+  position: relative;
   height: 7vh !important;
+  font-size: 30px !important;
 }
 
 .nav-item {
@@ -23,6 +25,7 @@
 
 .navbar-nav li a {
   color: orange !important;
+  font-size: 22px;
 }
 
 .user-nav {
@@ -53,5 +56,9 @@
 @media screen and (max-width: 992px) {
   .navbar-nav {
     margin-top: 25px;
+  }
+
+  .navbar-brand {
+    font-size: 25px !important;
   }
 }
