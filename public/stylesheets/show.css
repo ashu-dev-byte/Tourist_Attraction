@@ -55,3 +55,25 @@ img {
   top: 1.8px;
   color: #cc5500;
 }
+
+.edit-btn {
+  width: 105px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
+  display: none;
+  transition: all 0.5s ease-in;
+}
+
+.desc-section {
+  margin-top: 25px;
+}
+
+.main-card:hover .edit-btn {
+  transition: all 0.5s ease-in;
+  display: flex;
+}

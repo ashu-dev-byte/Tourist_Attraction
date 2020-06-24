@@ -32,10 +32,17 @@
               <%= specificSpot.name %>,
               <span class="city-name"><%= specificSpot.city %></span>
             </h4>
+            <a
+              class="btn btn-warning float-right edit-btn"
+              href="/touristspots/<%= specificSpot._id %>/edit"
+              >Edit</a
+            >
             <p class="card-text sub-by-name">
               Submitted by <%= specificSpot.author.username %>
             </p>
-            <p class="card-text"><%- specificSpot.description %></p>
+            <p class="card-text desc-section">
+              <%- specificSpot.description %>
+            </p>
           </div>
         </div>
         <div class="card review-card">

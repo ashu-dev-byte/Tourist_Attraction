@@ -11,53 +11,61 @@
           color: rgb(255, 166, 0);
         "
       >
-        Create a new Exploration Point
+        Edit <%= foundSpot.name %>
       </h1>
 
-      <form action="/touristspots" method="POST">
+      <form
+        action="/touristspots/<%= foundSpot._id %>?_method=PUT"
+        method="POST"
+      >
         <div class="form-group">
-          <label for="name">Enter Name: </label>
+          <label for="spot[name]">Edit Name: </label>
           <input
             class="form-control"
             type="text"
-            name="name"
+            name="spot[name]"
             maxlength="35"
             autocomplete="off"
+            value="<%= foundSpot.name %>"
           />
           <span style="margin-left: 10px; font-size: 14.5px; color: olive;"
             >Max limit : 35 characters</span
           >
         </div>
         <div class="form-group">
-          <label for="city">Enter City:</label>
+          <label for="spot[city]">Edit City:</label>
           <input
             class="form-control"
             type="text"
-            name="city"
+            name="spot[city]"
             maxlength="35"
             autocomplete="off"
+            value="<%= foundSpot.city %>"
           />
           <span style="margin-left: 10px; font-size: 14.5px; color: olive;"
             >Max limit : 35 characters</span
           >
         </div>
         <div class="form-group">
-          <label for="imageURL">Enter Image URL:</label>
+          <label for="spot[imageURL]">Edit Image URL:</label>
           <input
             class="form-control"
             type="text"
-            name="imageURL"
+            name="spot[imageURL]"
             autocomplete="off"
+            value="<%= foundSpot.imageURL %>"
           />
         </div>
         <div class="form-group">
-          <label for="description">Enter Description:</label>
+          <label for="spot[description]">Edit Description:</label>
           <textarea
             class="form-control"
-            name="description"
+            name="spot[description]"
             autocomplete="off"
             style="height: 125px;"
-          ></textarea>
+          >
+<%= foundSpot.description %></textarea
+          >
         </div>
         <div class="form-group">
           <button class="btn-lg btn-primary btn-block">Submit</button>

@@ -5,6 +5,7 @@ const passport = require("passport");
 const user = require("./models/user");
 const mongoose = require("mongoose");
 const seedDB = require("./seeds");
+const methodOverride = require("method-override");
 const express = require("express");
 const app = express();
 
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 //seedDB();
 

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const tspot = require("../models/tspot");
 
+//Get All Exploration Points
 router.get("/", isLoggedIn, (req, res) => {
   tspot.find({}, (err, allTSpots) => {
     if (err) {
@@ -12,6 +13,7 @@ router.get("/", isLoggedIn, (req, res) => {
   });
 });
 
+//Add Exploration Points
 router.post("/", isLoggedIn, (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
@@ -40,10 +42,12 @@ router.post("/", isLoggedIn, (req, res) => {
   res.redirect("/touristspots");
 });
 
+//Show Form to Exploration Points
 router.get("/new", isLoggedIn, (req, res) => {
   res.render("touristspots/newSpot");
 });
 
+//Find and Render Specific Exploration Point
 router.get("/:id", isLoggedIn, (req, res) => {
   tspot
     .findById(req.params.id)
@@ -58,6 +62,31 @@ router.get("/:id", isLoggedIn, (req, res) => {
         res.render("touristspots/show", { specificSpot: specificSpot });
       }
     });
+});
+
+//Show to Edit Specific Exploration Point
+router.get("/:id/edit", (req, res) => {
+  tspot.findById(req.params.id, (err, foundSpot) => {
+    if (err) {
+      console.log("Error while showing Edit Explorating Point Page!!");
+      res.redirect("/touristspots");
+    } else {
+      res.render("touristspots/edit", { foundSpot: foundSpot });
+    }
+  });
+});
+
+//Update Specific Exploration Point
+router.put("/:id", (req, res) => {
+  tspot.findByIdAndUpdate(req.params.id, req.body.spot, (err, updatedSpot) => {
+    if (err) {
+      console.log("Error while updating Explorating Point!!");
+      res.redirect("/touristspots");
+    } else {
+      console.log("Successfully updated Explorating Point!!");
+      res.redirect("/touristspots/" + req.params.id);
+    }
+  });
 });
 
 function isLoggedIn(req, res, next) {
