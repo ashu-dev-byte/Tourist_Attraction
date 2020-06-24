@@ -49,3 +49,9 @@
   background-color: rgb(252, 243, 229);
   width: 15.6rem !important;
 }
+
+@media screen and (max-width: 992px) {
+  .navbar-nav {
+    margin-top: 25px;
+  }
+}
