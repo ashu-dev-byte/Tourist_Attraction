@@ -32,6 +32,12 @@
               <%= specificSpot.name %>,
               <span class="city-name"><%= specificSpot.city %></span>
             </h4>
+            <form
+              action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn btn-danger float-right del-btn">Delete</button>
+            </form>
             <a
               class="btn btn-warning float-right edit-btn"
               href="/touristspots/<%= specificSpot._id %>/edit"

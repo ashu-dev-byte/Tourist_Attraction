@@ -76,7 +76,7 @@ router.get("/:id/edit", (req, res) => {
   });
 });
 
-//Update Specific Exploration Point
+//Update a Specific Exploration Point
 router.put("/:id", (req, res) => {
   tspot.findByIdAndUpdate(req.params.id, req.body.spot, (err, updatedSpot) => {
     if (err) {
@@ -85,6 +85,17 @@ router.put("/:id", (req, res) => {
     } else {
       console.log("Successfully updated Explorating Point!!");
       res.redirect("/touristspots/" + req.params.id);
+    }
+  });
+});
+
+//Delete a Specific Exploration Point
+router.delete("/:id", (req, res) => {
+  tspot.findByIdAndRemove(req.params.id, (err) => {
+    if (err) {
+      res.redirect("/touristspots");
+    } else {
+      res.redirect("/touristspots");
     }
   });
 });
