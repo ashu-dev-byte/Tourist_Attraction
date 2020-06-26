@@ -3,7 +3,7 @@ const router = express.Router();
 const tspot = require("../models/tspot");
 
 //Get All Exploration Points
-router.get("/", isLoggedIn, (req, res) => {
+router.get("/", (req, res) => {
   tspot.find({}, (err, allTSpots) => {
     if (err) {
       console.log("Some error occured while traversing database!");
@@ -42,13 +42,13 @@ router.post("/", isLoggedIn, (req, res) => {
   res.redirect("/touristspots");
 });
 
-//Show Form to Exploration Points
+//Show Form to Add Exploration Point
 router.get("/new", isLoggedIn, (req, res) => {
   res.render("touristspots/newSpot");
 });
 
 //Find and Render Specific Exploration Point
-router.get("/:id", isLoggedIn, (req, res) => {
+router.get("/:id", (req, res) => {
   tspot
     .findById(req.params.id)
     .populate("comments")
@@ -65,19 +65,14 @@ router.get("/:id", isLoggedIn, (req, res) => {
 });
 
 //Show to Edit Specific Exploration Point
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", checkExpoPointOwnership, (req, res) => {
   tspot.findById(req.params.id, (err, foundSpot) => {
-    if (err) {
-      console.log("Error while showing Edit Explorating Point Page!!");
-      res.redirect("/touristspots");
-    } else {
-      res.render("touristspots/edit", { foundSpot: foundSpot });
-    }
+    res.render("touristspots/edit", { foundSpot: foundSpot });
   });
 });
 
 //Update a Specific Exploration Point
-router.put("/:id", (req, res) => {
+router.put("/:id", checkExpoPointOwnership, (req, res) => {
   tspot.findByIdAndUpdate(req.params.id, req.body.spot, (err, updatedSpot) => {
     if (err) {
       console.log("Error while updating Explorating Point!!");
@@ -90,7 +85,7 @@ router.put("/:id", (req, res) => {
 });
 
 //Delete a Specific Exploration Point
-router.delete("/:id", (req, res) => {
+router.delete("/:id", checkExpoPointOwnership, (req, res) => {
   tspot.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       res.redirect("/touristspots");
@@ -99,6 +94,25 @@ router.delete("/:id", (req, res) => {
     }
   });
 });
+
+function checkExpoPointOwnership(req, res, next) {
+  if (req.isAuthenticated()) {
+    tspot.findById(req.params.id, (err, foundSpot) => {
+      if (err) {
+        console.log("Error while showing Edit Explorating Point Page!!");
+        res.redirect("/touristspots");
+      } else {
+        if (foundSpot.author.id.equals(req.user._id)) {
+          return next();
+        } else {
+          res.send("<h1>You don't have that authorization!</h1>");
+        }
+      }
+    });
+  } else {
+    res.send("<h1>You must be logged in before doing so!</h1>");
+  }
+}
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

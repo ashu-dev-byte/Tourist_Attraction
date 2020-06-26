@@ -32,6 +32,8 @@
               <%= specificSpot.name %>,
               <span class="city-name"><%= specificSpot.city %></span>
             </h4>
+            <% if(currentUser &&
+            specificSpot.author.id.equals(currentUser._id)){ %>
             <form
               action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
               method="POST"
@@ -43,6 +45,7 @@
               href="/touristspots/<%= specificSpot._id %>/edit"
               >Edit</a
             >
+            <% } %>
             <p class="card-text sub-by-name">
               Submitted by <%= specificSpot.author.username %>
             </p>
