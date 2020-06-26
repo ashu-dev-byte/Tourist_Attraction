@@ -78,6 +78,17 @@ router.put("/:comment_id", (req, res) => {
   );
 });
 
+//Delete a Specific Comment
+router.delete("/:comment_id", (req, res) => {
+  commentDB.findByIdAndRemove(req.params.comment_id, (err) => {
+    if (err) {
+      res.redirect("/touristspots/" + req.params.id);
+    } else {
+      res.redirect("/touristspots/" + req.params.id);
+    }
+  });
+});
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
