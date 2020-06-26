@@ -69,6 +69,8 @@
             <div class="row cm-div">
               <div class="col-md-12">
                 <span class="float-right span-text">7 days ago</span>
+                <% if(currentUser && comment.author.id.equals(currentUser._id)){
+                %>
                 <form
                   action="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>?_method=DELETE"
                   method="POST"
@@ -82,6 +84,7 @@
                   href="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>/edit"
                   >Edit</a
                 >
+                <% } %>
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >
