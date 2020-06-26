@@ -66,13 +66,26 @@
             <br />
 
             <% specificSpot.comments.forEach((comment) => { %>
-            <div class="row">
+            <div class="row cm-div">
               <div class="col-md-12">
-                <span class="float-right">7 days ago</span>
+                <span class="float-right span-text">7 days ago</span>
+                <form
+                  action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-danger float-right cm-del-btn">
+                    Delete
+                  </button>
+                </form>
+                <a
+                  class="btn btn-warning float-right cm-edit-btn"
+                  href="/touristspots/<%= specificSpot._id %>/edit"
+                  >Edit</a
+                >
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >
-                <p><%- comment.text %></p>
+                <p class="cm-text"><%- comment.text %></p>
               </div>
             </div>
             <% }) %>

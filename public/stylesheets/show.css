@@ -87,6 +87,55 @@ img {
   margin-top: 25px;
 }
 
+.cm-edit-btn {
+  width: 60px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5px;
+  margin-right: 3px;
+  display: none;
+}
+
+.cm-del-btn {
+  width: 60px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5px;
+  margin-right: 3px;
+  display: none;
+}
+
+.cm-div:hover .cm-edit-btn {
+  transition: all 0.5s ease-in;
+  /* transform: translateX(80px); */
+  display: flex;
+}
+
+.cm-div:hover .cm-del-btn {
+  transition: all 0.5s ease-in;
+  /* transform: translateX(80px); */
+  display: flex;
+}
+
+/* .cm-div:hover .span-text {
+  transition: all 0.4s ease-in;
+  transform: translateY(20px);
+} */
+
+.span-text {
+  font-weight: 500;
+}
+
 /* .main-card:hover .edit-btn {
   transition: all 0.5s ease-in;
   display: flex;
@@ -100,5 +149,17 @@ img {
 
   .del-btn {
     margin-top: 2.5px;
+  }
+
+  .cm-edit-btn {
+    transform: translateX(0px);
+  }
+
+  .cm-del-btn {
+    transform: translateX(0px);
+  }
+
+  .cm-div:hover .span-text {
+    display: none;
   }
 }

@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const tspot = require("../models/tspot");
 const commentDB = require("../models/comment");
 
+//Show Add comment page
 router.get("/new", isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
@@ -15,6 +16,7 @@ router.get("/new", isLoggedIn, (req, res) => {
   });
 });
 
+//Add comment
 router.post("/", isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
@@ -41,6 +43,11 @@ router.post("/", isLoggedIn, (req, res) => {
       });
     }
   });
+});
+
+//Show Edit comment page
+router.get("/:comment_id/edit", (req, res) => {
+  res.send("Edit Route");
 });
 
 function isLoggedIn(req, res, next) {
