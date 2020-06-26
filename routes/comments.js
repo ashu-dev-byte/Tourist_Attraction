@@ -47,7 +47,35 @@ router.post("/", isLoggedIn, (req, res) => {
 
 //Show Edit comment page
 router.get("/:comment_id/edit", (req, res) => {
-  res.send("Edit Route");
+  tspot.findById(req.params.id, (err, specificSpot) => {
+    commentDB.findById(req.params.comment_id, (err, gotComment) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("comments/edit", {
+          specificSpot: specificSpot,
+          gotComment: gotComment,
+        });
+      }
+    });
+  });
+});
+
+//Update Comment
+router.put("/:comment_id", (req, res) => {
+  commentDB.findByIdAndUpdate(
+    req.params.comment_id,
+    req.body.comment,
+    (err, gotComment) => {
+      if (err) {
+        console.log("Error while updating Explorating Point!!");
+        res.redirect("back");
+      } else {
+        console.log("Successfully updated Explorating Point!!");
+        res.redirect("/touristspots/" + req.params.id);
+      }
+    }
+  );
 });
 
 function isLoggedIn(req, res, next) {
