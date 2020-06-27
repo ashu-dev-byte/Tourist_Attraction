@@ -1,18 +1,44 @@
-<%- include("./partials/header.ejs") %>
-<div class="container">
-  <header class="jumbotron">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Traveller's Paradise</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/landing.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+      type="text/javascript"
+      async
+    ></script>
+  </head>
+  <body>
     <div class="container">
-      <h1>Welcome to Exploration Point!</h1>
-      <p>
-        View the handpicked locations from the posts of our various users and
-        see whose explorations matches with yours.
-      </p>
-      <p>
-        <a class="btn btn-lg btn-primary" href="/touristspots"
-          >View Exploration Points</a
-        >
-      </p>
+      <% if(errorFlash && errorFlash.length > 0){ %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+      <% } %> <% if(successFlash && successFlash.length > 0){ %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+      <% } %>
     </div>
-  </header>
-</div>
-<%- include("./partials/footer.ejs") %>
+
+    <div id="landing-header">
+      <h1>Welcome to Traveller's Paradise!</h1>
+      <a href="/campgrounds" class="btn btn-lg btn-info"
+        >View All Exploration Points</a
+      >
+    </div>
+
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>
