@@ -39,9 +39,9 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/touristspots/",
-    failureRedirect: "/",
-  }),
-  (req, res) => {}
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
 );
 
 router.get("/logout", (req, res) => {
