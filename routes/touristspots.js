@@ -65,7 +65,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//Show to Edit Specific Exploration Point
+//Show Form to Edit Specific Exploration Point
 router.get("/:id/edit", middleware.checkExpoPointOwnership, (req, res) => {
   tspot.findById(req.params.id, (err, foundSpot) => {
     res.render("touristspots/edit", { foundSpot: foundSpot });

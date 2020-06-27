@@ -8,17 +8,20 @@ middlewareObject.checkExpoPointOwnership = function (req, res, next) {
     tspot.findById(req.params.id, (err, foundSpot) => {
       if (err) {
         console.log("Error while showing Edit Explorating Point Page!!");
+        req.flash("error", "Exploration Point not found.");
         res.redirect("/touristspots");
       } else {
         if (foundSpot.author.id.equals(req.user._id)) {
           return next();
         } else {
-          res.send("<h1>You don't have that authorization!</h1>");
+          req.flash("error", "You don't have permission to do that.");
+          res.redirect("/touristspots/" + foundSpot._id);
         }
       }
     });
   } else {
-    res.send("<h1>You must be logged in before doing so!</h1>");
+    req.flash("error", "You need to be logged in to do that.");
+    res.redirect("back");
   }
 };
 
@@ -27,18 +30,19 @@ middlewareObject.checkCommentOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {
     commentDB.findById(req.params.comment_id, (err, foundComment) => {
       if (err) {
-        console.log("Error while showing Edit Explorating Point Page!!");
-        res.redirect("/touristspots");
+        res.redirect("back");
       } else {
         if (foundComment.author.id.equals(req.user._id)) {
           return next();
         } else {
-          res.send("<h1>You don't have that authorization!</h1>");
+          req.flash("error", "You don't have permission to do that.");
+          res.redirect("back");
         }
       }
     });
   } else {
-    res.send("<h1>You must be logged in before doing so!</h1>");
+    req.flash("error", "You need to be logged in to do that.");
+    res.redirect("back");
   }
 };
 
@@ -47,6 +51,7 @@ middlewareObject.isLoggedIn = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash("error", "You need to be logged in to do that.");
   res.redirect("/login");
 };
 

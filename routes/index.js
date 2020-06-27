@@ -16,12 +16,17 @@ router.post("/register", (req, res) => {
   user.register(newUser, req.body.password, (err, createdUser) => {
     if (err) {
       console.log(err);
-      return res.render("register");
+      req.flash("error", err.message);
+      return res.redirect("/register");
     }
 
     passport.authenticate("local")(req, res, () => {
       console.log(createdUser);
-      res.redirect("/");
+      req.flash(
+        "success",
+        "Welcome to Traveller's Paradise, " + createdUser.username
+      );
+      res.redirect("/touristspots");
     });
   });
 });
@@ -33,7 +38,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/touristspots",
+    successRedirect: "/touristspots/",
     failureRedirect: "/",
   }),
   (req, res) => {}
@@ -41,14 +46,8 @@ router.post(
 
 router.get("/logout", (req, res) => {
   req.logOut();
+  req.flash("success", "Logged out successfully.");
   res.redirect("/touristspots");
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

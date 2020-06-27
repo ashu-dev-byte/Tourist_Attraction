@@ -21,6 +21,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 router.post("/", middleware.isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
+      req.flash("error", "Something went wrong!");
       console.log("Error while adding comment!" + err);
       res.redirect("/touristspots/:id");
     } else {
@@ -39,6 +40,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
           foundTspot.comments.push(comment);
           foundTspot.save();
           // console.log(comment);
+          req.flash("success", "Added comment.");
           res.redirect(`/touristspots/${foundTspot._id}`);
         }
       });
@@ -55,6 +57,7 @@ router.get(
       commentDB.findById(req.params.comment_id, (err, gotComment) => {
         if (err) {
           console.log(err);
+          res.redirect("back");
         } else {
           res.render("comments/edit", {
             specificSpot: specificSpot,
@@ -73,10 +76,11 @@ router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
     req.body.comment,
     (err, gotComment) => {
       if (err) {
-        console.log("Error while updating Explorating Point!!");
+        console.log("Error while updating Comment!!");
         res.redirect("back");
       } else {
-        console.log("Successfully updated Explorating Point!!");
+        console.log("Updated Comment!!");
+        req.flash("success", "Edited comment.");
         res.redirect("/touristspots/" + req.params.id);
       }
     }
@@ -87,8 +91,10 @@ router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
 router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
   commentDB.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
+      console.log("Error while deleting comment!!");
       res.redirect("/touristspots/" + req.params.id);
     } else {
+      req.flash("error", "Deleted comment.");
       res.redirect("/touristspots/" + req.params.id);
     }
   });
