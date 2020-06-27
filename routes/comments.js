@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const tspot = require("../models/tspot");
-const commentDB = require("../models/comment");
 const middleware = require("../middleware/index");
+const commentDB = require("../models/comment");
+const tspot = require("../models/tspot");
 
 //Show Add comment page
 router.get("/new", middleware.isLoggedIn, (req, res) => {

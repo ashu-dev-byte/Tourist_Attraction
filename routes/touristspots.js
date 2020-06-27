@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const tspot = require("../models/tspot");
 const middleware = require("../middleware/index");
+const tspot = require("../models/tspot");
 
 //Get All Exploration Points
 router.get("/", (req, res) => {

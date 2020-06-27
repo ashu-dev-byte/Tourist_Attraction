@@ -1,18 +1,18 @@
 const expressSanitizer = require("express-sanitizer");
-const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 const localStrategy = require("passport-local");
-const passport = require("passport");
+const bodyParser = require("body-parser");
+const flash = require("connect-flash");
 const user = require("./models/user");
+const passport = require("passport");
 const mongoose = require("mongoose");
 const seedDB = require("./seeds");
-const methodOverride = require("method-override");
 const express = require("express");
 const app = express();
 
 const touristspotsRoutes = require("./routes/touristspots");
 const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
-const { text } = require("express");
 
 mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
