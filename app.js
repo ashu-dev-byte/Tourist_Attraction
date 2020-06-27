@@ -16,10 +16,11 @@ const indexRoutes = require("./routes/index");
 
 mongoose.connect("mongodb://localhost/touristSpots");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressSanitizer());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
+app.use(expressSanitizer());
+app.use(flash);
 //seedDB();
 
 // ====================Passport Configuration====================
