@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const tspot = require("../models/tspot");
+const middleware = require("../middleware/index");
 
 //Get All Exploration Points
 router.get("/", (req, res) => {
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
 });
 
 //Add Exploration Points
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
   let imageURL = req.body.imageURL;
@@ -31,7 +32,7 @@ router.post("/", isLoggedIn, (req, res) => {
     author: author,
   };
 
-  tspot.create(newSpot, isLoggedIn, (err, newTSpot) => {
+  tspot.create(newSpot, middleware.isLoggedIn, (err, newTSpot) => {
     if (err) {
       console.log("Some error occured while adding newTSpot to database!");
     } else {
@@ -43,7 +44,7 @@ router.post("/", isLoggedIn, (req, res) => {
 });
 
 //Show Form to Add Exploration Point
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
   res.render("touristspots/newSpot");
 });
 
@@ -65,14 +66,14 @@ router.get("/:id", (req, res) => {
 });
 
 //Show to Edit Specific Exploration Point
-router.get("/:id/edit", checkExpoPointOwnership, (req, res) => {
+router.get("/:id/edit", middleware.checkExpoPointOwnership, (req, res) => {
   tspot.findById(req.params.id, (err, foundSpot) => {
     res.render("touristspots/edit", { foundSpot: foundSpot });
   });
 });
 
 //Update a Specific Exploration Point
-router.put("/:id", checkExpoPointOwnership, (req, res) => {
+router.put("/:id", middleware.checkExpoPointOwnership, (req, res) => {
   tspot.findByIdAndUpdate(req.params.id, req.body.spot, (err, updatedSpot) => {
     if (err) {
       console.log("Error while updating Explorating Point!!");
@@ -85,7 +86,7 @@ router.put("/:id", checkExpoPointOwnership, (req, res) => {
 });
 
 //Delete a Specific Exploration Point
-router.delete("/:id", checkExpoPointOwnership, (req, res) => {
+router.delete("/:id", middleware.checkExpoPointOwnership, (req, res) => {
   tspot.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       res.redirect("/touristspots");
@@ -94,31 +95,5 @@ router.delete("/:id", checkExpoPointOwnership, (req, res) => {
     }
   });
 });
-
-function checkExpoPointOwnership(req, res, next) {
-  if (req.isAuthenticated()) {
-    tspot.findById(req.params.id, (err, foundSpot) => {
-      if (err) {
-        console.log("Error while showing Edit Explorating Point Page!!");
-        res.redirect("/touristspots");
-      } else {
-        if (foundSpot.author.id.equals(req.user._id)) {
-          return next();
-        } else {
-          res.send("<h1>You don't have that authorization!</h1>");
-        }
-      }
-    });
-  } else {
-    res.send("<h1>You must be logged in before doing so!</h1>");
-  }
-}
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

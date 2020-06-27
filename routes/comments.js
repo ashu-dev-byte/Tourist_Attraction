@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const tspot = require("../models/tspot");
 const commentDB = require("../models/comment");
+const middleware = require("../middleware/index");
 
 //Show Add comment page
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
       console.log("Error while showing add comment page!" + err);
@@ -17,7 +18,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 //Add comment
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
   tspot.findById(req.params.id, (err, foundTspot) => {
     if (err) {
       console.log("Error while adding comment!" + err);
@@ -46,23 +47,27 @@ router.post("/", isLoggedIn, (req, res) => {
 });
 
 //Show Edit comment page
-router.get("/:comment_id/edit", checkCommentOwnership, (req, res) => {
-  tspot.findById(req.params.id, (err, specificSpot) => {
-    commentDB.findById(req.params.comment_id, (err, gotComment) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("comments/edit", {
-          specificSpot: specificSpot,
-          gotComment: gotComment,
-        });
-      }
+router.get(
+  "/:comment_id/edit",
+  middleware.checkCommentOwnership,
+  (req, res) => {
+    tspot.findById(req.params.id, (err, specificSpot) => {
+      commentDB.findById(req.params.comment_id, (err, gotComment) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("comments/edit", {
+            specificSpot: specificSpot,
+            gotComment: gotComment,
+          });
+        }
+      });
     });
-  });
-});
+  }
+);
 
 //Update Comment
-router.put("/:comment_id", checkCommentOwnership, (req, res) => {
+router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
   commentDB.findByIdAndUpdate(
     req.params.comment_id,
     req.body.comment,
@@ -79,7 +84,7 @@ router.put("/:comment_id", checkCommentOwnership, (req, res) => {
 });
 
 //Delete a Specific Comment
-router.delete("/:comment_id", checkCommentOwnership, (req, res) => {
+router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
   commentDB.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
       res.redirect("/touristspots/" + req.params.id);
@@ -88,31 +93,5 @@ router.delete("/:comment_id", checkCommentOwnership, (req, res) => {
     }
   });
 });
-
-function checkCommentOwnership(req, res, next) {
-  if (req.isAuthenticated()) {
-    commentDB.findById(req.params.comment_id, (err, foundComment) => {
-      if (err) {
-        console.log("Error while showing Edit Explorating Point Page!!");
-        res.redirect("/touristspots");
-      } else {
-        if (foundComment.author.id.equals(req.user._id)) {
-          return next();
-        } else {
-          res.send("<h1>You don't have that authorization!</h1>");
-        }
-      }
-    });
-  } else {
-    res.send("<h1>You must be logged in before doing so!</h1>");
-  }
-}
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;
