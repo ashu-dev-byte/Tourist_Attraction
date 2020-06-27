@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.use(expressSanitizer());
-app.use(flash);
+app.use(flash());
 //seedDB();
 
 // ====================Passport Configuration====================
@@ -39,6 +39,8 @@ passport.deserializeUser(user.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.errorFlash = req.flash("error");
+  res.locals.successFlash = req.flash("success");
   next();
 });
 // ==========================END===================================
