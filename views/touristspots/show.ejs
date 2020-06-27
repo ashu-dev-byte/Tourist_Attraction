@@ -27,11 +27,6 @@
         <div class="card main-card">
           <img class="card-img-top" src="<%= specificSpot.imageURL %>" />
           <div class="card-body">
-            <h5 class="float-right right-side">Open Daily</h5>
-            <h4 class="card-title">
-              <%= specificSpot.name %>,
-              <span class="city-name"><%= specificSpot.city %></span>
-            </h4>
             <% if(currentUser &&
             specificSpot.author.id.equals(currentUser._id)){ %>
             <form
@@ -46,6 +41,11 @@
               >Edit</a
             >
             <% } %>
+            <h4 class="card-title">
+              <%= specificSpot.name %>,
+              <span class="city-name"><%= specificSpot.city %></span>
+            </h4>
+
             <p class="card-text sub-by-name">
               Submitted by <%= specificSpot.author.username %>
             </p>

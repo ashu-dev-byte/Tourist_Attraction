@@ -65,7 +65,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -5px;
+  /* margin-top: -5px; */
   /* display: none;
   transition: all 0.5s ease-in; */
 }
@@ -79,7 +79,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -5px;
+  /* margin-top: -5px; */
   margin-left: 7.5px;
 }
 
@@ -143,12 +143,16 @@ img {
 
 @media screen and (max-width: 411px) {
   .edit-btn {
-    margin-right: -112.5px;
-    margin-top: -35px;
+    margin-right: -72.5px;
+    margin-top: 3.5px;
+    width: 65px;
+    height: 24px;
   }
 
   .del-btn {
-    margin-top: 2.5px;
+    margin-top: 34.5px;
+    width: 65px;
+    height: 24px;
   }
 
   .cm-edit-btn {
