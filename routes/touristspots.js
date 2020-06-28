@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const middleware = require("../middleware/index");
 const tspot = require("../models/tspot");
+var nextt = require("../views/nextt");
 
 //Get All Exploration Points
 router.get("/", (req, res) => {
@@ -25,6 +26,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   let city = req.body.city;
   let imageURL = req.body.imageURL;
   let description = req.sanitize(req.body.description);
+  let createdDate = nextt;
   var author = {
     username: req.user.username,
     id: req.user._id,
@@ -34,6 +36,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     city: city,
     imageURL: imageURL,
     description: description,
+    created: createdDate,
     author: author,
   };
 
@@ -42,7 +45,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
       console.log("Some error occured while adding newTSpot to database!");
     } else {
       console.log("New Tourist Spot saved to database.");
-      //console.log(newTSpot);
+      console.log(newTSpot);
     }
   });
   req.flash("success", "Added Exploration Point.");
