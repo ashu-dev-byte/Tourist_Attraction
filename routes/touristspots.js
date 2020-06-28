@@ -14,6 +14,11 @@ router.get("/", (req, res) => {
   });
 });
 
+//Show Form to Add Exploration Point
+router.get("/new", middleware.isLoggedIn, (req, res) => {
+  res.render("touristspots/newSpot");
+});
+
 //Add Exploration Points
 router.post("/", middleware.isLoggedIn, (req, res) => {
   let name = req.body.name;
@@ -40,12 +45,8 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
       //console.log(newTSpot);
     }
   });
+  req.flash("success", "Added Exploration Point.");
   res.redirect("/touristspots");
-});
-
-//Show Form to Add Exploration Point
-router.get("/new", middleware.isLoggedIn, (req, res) => {
-  res.render("touristspots/newSpot");
 });
 
 //Find and Render Specific Exploration Point
@@ -80,6 +81,7 @@ router.put("/:id", middleware.checkExpoPointOwnership, (req, res) => {
       res.redirect("/touristspots");
     } else {
       console.log("Successfully updated Explorating Point!!");
+      req.flash("success", "Updated Exploration Point.");
       res.redirect("/touristspots/" + req.params.id);
     }
   });
@@ -91,6 +93,7 @@ router.delete("/:id", middleware.checkExpoPointOwnership, (req, res) => {
     if (err) {
       res.redirect("/touristspots");
     } else {
+      req.flash("success", "Deleted Exploration Point.");
       res.redirect("/touristspots");
     }
   });
