@@ -22,12 +22,14 @@ img {
 }
 
 .main-card {
-  background-color: #ceddf0;
+  background-color: #d7e5f8;
+  border: none;
 }
 
 .review-card {
   margin-top: 2em;
-  background-color: #d6e2f1;
+  background-color: #daebff;
+  border: none;
   /* background-color: #e5cfe9; */
 }
 
