@@ -68,23 +68,45 @@
             <% specificSpot.comments.forEach((comment) => { %>
             <div class="row cm-div">
               <div class="col-md-12">
-                <span class="float-right span-text">7 days ago</span>
                 <% if(currentUser && comment.author.id.equals(currentUser._id)){
                 %>
-                <form
-                  action="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>?_method=DELETE"
-                  method="POST"
-                >
-                  <button class="btn btn-danger float-right cm-del-btn">
-                    Delete
+                <div class="dropdown float-right">
+                  <button
+                    class="btn three-dots"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i style="font-size: 19px;" class="fa">&#xf142;</i>
                   </button>
-                </form>
-                <a
-                  class="btn btn-warning float-right cm-edit-btn"
-                  href="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>/edit"
-                  >Edit</a
-                >
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <form
+                      class="dropdown-item"
+                      action="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>/edit"
+                      method="GET"
+                    >
+                      <button class="btn btn-warning cm-edit-btn">
+                        Edit
+                      </button>
+                    </form>
+                    <form
+                      class="dropdown-item"
+                      action="/touristspots/<%= specificSpot._id %>/comments/<%= comment._id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button class="btn btn-danger cm-del-btn">
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </div>
                 <% } %>
+                <span class="float-right span-text">7 days ago</span>
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >

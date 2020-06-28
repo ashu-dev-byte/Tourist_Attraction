@@ -100,7 +100,6 @@ img {
   align-items: center;
   margin-top: 2.5px;
   margin-right: 3px;
-  display: none;
 }
 
 .cm-del-btn {
@@ -114,20 +113,60 @@ img {
   align-items: center;
   margin-top: 2.5px;
   margin-right: 3px;
+}
+
+.three-dots {
+  margin-top: -2.5px;
+  transform: scale(1.1);
+  padding: 6px 6px;
   display: none;
 }
 
-.cm-div:hover .cm-edit-btn {
+.three-dots:focus {
+  display: inline;
+}
+
+.cm-div:hover .three-dots {
+  display: inline;
+}
+
+.dropdown-menu {
+  background-color: #daebff;
+  min-width: 1rem;
+  left: -60 !important;
+}
+
+.dropdown-item {
+  background-color: #daebff;
+  width: 80px;
+  padding: 4px 4px;
+}
+
+.dropdown-menu form button {
+  /* background-color: #daebff; */
+  width: 70px;
+}
+
+.dropdown-menu form:hover {
+  background-color: #daebff;
+}
+
+/* .fa {
+  background-color: #daebff;
+  border: none;
+} */
+
+/* .cm-div:hover .cm-edit-btn {
   transition: all 0.5s ease-in;
-  /* transform: translateX(80px); */
+  transform: translateX(80px);
   display: flex;
 }
 
 .cm-div:hover .cm-del-btn {
   transition: all 0.5s ease-in;
-  /* transform: translateX(80px); */
+  transform: translateX(80px);
   display: flex;
-}
+} */
 
 /* .cm-div:hover .span-text {
   transition: all 0.4s ease-in;
@@ -136,6 +175,7 @@ img {
 
 .span-text {
   font-weight: 500;
+  margin-right: 8px;
 }
 
 /* .main-card:hover .edit-btn {
@@ -165,7 +205,11 @@ img {
     transform: translateX(0px);
   }
 
-  .cm-div:hover .span-text {
-    display: none;
+  .dropdown-menu {
+    left: -30 !important;
   }
+
+  /* .cm-div:hover .span-text {
+    display: none;
+  } */
 }
