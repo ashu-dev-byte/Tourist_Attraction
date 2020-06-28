@@ -49,6 +49,9 @@
             <p class="card-text sub-by-name">
               Submitted by <%= specificSpot.author.username %>
             </p>
+            <p class="card-text sub-date">
+              <%= specificSpot.created.toDateString() %>
+            </p>
             <p class="card-text desc-section">
               <%- specificSpot.description %>
             </p>

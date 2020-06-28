@@ -21,6 +21,14 @@ img {
   margin-top: -10px;
 }
 
+.sub-date {
+  color: rgb(82, 52, 219);
+  font-size: 15.4px;
+  font-weight: bold;
+  font-style: normal;
+  margin-top: -17.5px !important;
+}
+
 .main-card {
   background-color: #d7e5f8;
   border: none;
