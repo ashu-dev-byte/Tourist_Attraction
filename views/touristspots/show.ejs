@@ -29,14 +29,49 @@
           <div class="card-body">
             <% if(currentUser &&
             specificSpot.author.id.equals(currentUser._id)){ %>
+            <!-- ============Responsive Customization================================= -->
+            <div class="dropdown float-right">
+              <button
+                class="btn three-dots-main"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i style="font-size: 19px;" class="fa">&#xf142;</i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <form
+                  class="dropdown-item"
+                  action="/touristspots/<%= specificSpot._id %>/edit"
+                  method="GET"
+                >
+                  <button class="btn btn-warning cm-edit-btn">
+                    Edit
+                  </button>
+                </form>
+                <form
+                  class="dropdown-item"
+                  action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-danger cm-del-btn">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+            <!-- ============Responsive Customization================================= -->
             <form
               action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
               method="POST"
+              class="expo-res"
             >
               <button class="btn btn-danger float-right del-btn">Delete</button>
             </form>
             <a
-              class="btn btn-warning float-right edit-btn"
+              class="btn btn-warning float-right edit-btn expo-res"
               href="/touristspots/<%= specificSpot._id %>/edit"
               >Edit</a
             >

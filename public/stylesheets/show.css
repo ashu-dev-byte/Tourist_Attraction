@@ -123,6 +123,10 @@ img {
   margin-right: 3px;
 }
 
+.three-dots-main {
+  display: none;
+}
+
 .three-dots {
   margin-top: -2.5px;
   transform: scale(1.1);
@@ -138,14 +142,19 @@ img {
   display: inline;
 }
 
+.cm-div:last-child {
+  margin-bottom: 35px;
+}
+
 .dropdown-menu {
-  background-color: #daebff;
+  background-color: #92c3fa;
   min-width: 1rem;
+  height: 75px;
   left: -60 !important;
 }
 
 .dropdown-item {
-  background-color: #daebff;
+  background-color: #92c3fa;
   width: 80px;
   padding: 4px 4px;
 }
@@ -213,10 +222,21 @@ img {
     transform: translateX(0px);
   }
 
+  .card-title .city-name {
+    white-space: pre;
+  }
+
   .dropdown-menu {
     left: -30 !important;
   }
 
+  .expo-res {
+    display: none;
+  }
+
+  .three-dots-main {
+    display: inline;
+  }
   /* .cm-div:hover .span-text {
     display: none;
   } */
