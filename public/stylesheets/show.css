@@ -224,6 +224,7 @@ img {
 
   .card-title .city-name {
     white-space: pre;
+    /* display: block; */
   }
 
   .dropdown-menu {
