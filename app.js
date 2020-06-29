@@ -15,7 +15,10 @@ const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
 app.locals.moment = require("moment");
 
-mongoose.connect("mongodb://localhost/touristSpots");
+mongoose.connect("mongodb://localhost/touristSpots", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
