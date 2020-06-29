@@ -66,8 +66,24 @@
         </div>
       </div>
 
-      <%}); %>
+      <%}); %> <% if(noMatch !== null) { %>
+      <div class="container" style="margin: 1px 30px 350px 30px;">
+        <h3 style="color: rgb(247, 78, 48);"><%= noMatch %></h3>
+      </div>
+      <% } %>
     </div>
+    <% if(checkQuery) { %>
+    <div
+      class="container"
+      style="
+        display: flex;
+        justify-content: space-around;
+        margin: 20px auto 40px auto;
+      "
+    >
+      <a href="/touristSpots" class="btn btn-lg btn-primary">Go Back</a>
+    </div>
+    <% } %>
   </div>
 </div>
 

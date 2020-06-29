@@ -62,7 +62,7 @@
                 </form>
               </div>
             </div>
-            <!-- ============Responsive Customization================================= -->
+            <!-- ======================================================================= -->
             <form
               action="/touristspots/<%= specificSpot._id %>?_method=DELETE"
               method="POST"
@@ -85,7 +85,7 @@
               Submitted by <%= specificSpot.author.username %>
             </p>
             <p class="card-text sub-date">
-              <%= moment(specificSpot.createdAt).fromNow() %>
+              Uploaded <%= moment(specificSpot.createdAt).fromNow() %>
             </p>
             <p class="card-text desc-section">
               <%- specificSpot.description %>

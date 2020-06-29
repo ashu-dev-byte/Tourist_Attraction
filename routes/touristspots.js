@@ -5,13 +5,44 @@ const tspot = require("../models/tspot");
 
 //Get All Exploration Points
 router.get("/", (req, res) => {
-  tspot.find({}, (err, allTSpots) => {
-    if (err) {
-      console.log("Some error occured while traversing database!");
-    } else {
-      res.render("touristspots/index", { tspots: allTSpots });
-    }
-  });
+  let noMatch = null;
+  let checkQuery = false;
+
+  if (req.query.search) {
+    // Refine the Exploration Points according to the query
+    const regex = new RegExp(middleware.escapeRegex(req.query.search), "gi");
+    checkQuery = true;
+
+    tspot.find({ name: regex }, function (err, allTSpots) {
+      if (err) {
+        console.log("Some error occured while traversing database!");
+        res.redirect("back");
+      } else {
+        if (allTSpots.length < 1) {
+          noMatch =
+            "No Exploration Points match that query, please try again with some different names.";
+        }
+        res.render("touristspots/index", {
+          tspots: allTSpots,
+          noMatch: noMatch,
+          checkQuery: checkQuery,
+        });
+      }
+    });
+  } else {
+    // Get all Exploration Points from DB
+    tspot.find({}, (err, allTSpots) => {
+      if (err) {
+        console.log("Some error occured while traversing database!");
+      } else {
+        res.render("touristspots/index", {
+          tspots: allTSpots,
+          noMatch: noMatch,
+          checkQuery: checkQuery,
+        });
+      }
+    });
+  }
 });
 
 //Show Form to Add Exploration Point
