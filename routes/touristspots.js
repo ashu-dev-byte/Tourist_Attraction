@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const middleware = require("../middleware/index");
 const tspot = require("../models/tspot");
-var nextt = require("../views/nextt");
 
 //Get All Exploration Points
 router.get("/", (req, res) => {
@@ -26,7 +25,6 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   let city = req.body.city;
   let imageURL = req.body.imageURL;
   let description = req.sanitize(req.body.description);
-  let createdDate = nextt;
   var author = {
     username: req.user.username,
     id: req.user._id,
@@ -36,7 +34,6 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     city: city,
     imageURL: imageURL,
     description: description,
-    created: createdDate,
     author: author,
   };
 

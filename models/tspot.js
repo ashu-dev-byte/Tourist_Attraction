@@ -5,7 +5,7 @@ const tspotSchema = new mongoose.Schema({
   city: String,
   imageURL: String,
   description: String,
-  created: String,
+  createdAt: { type: Date, default: Date.now },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

@@ -50,7 +50,7 @@
               Submitted by <%= specificSpot.author.username %>
             </p>
             <p class="card-text sub-date">
-              <%= specificSpot.created %>
+              <%= moment(specificSpot.createdAt).fromNow() %>
             </p>
             <p class="card-text desc-section">
               <%- specificSpot.description %>
@@ -109,7 +109,9 @@
                   </div>
                 </div>
                 <% } %>
-                <span class="float-right span-text">7 days ago</span>
+                <span class="float-right span-text">
+                  <%=moment(comment.createdAt).fromNow()%>s
+                </span>
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >
