@@ -4,7 +4,10 @@ const middleware = require("../middleware/index");
 const tspot = require("../models/tspot");
 
 //Get All Exploration Points
-router.get("/", (req, res) => {
+router.get("/", function (req, res) {
+  let perPage = 9;
+  let pageQuery = parseInt(req.query.page);
+  let pageNumber = pageQuery ? pageQuery : 1;
   let noMatch = null;
   let checkQuery = false;
 
@@ -13,35 +16,53 @@ router.get("/", (req, res) => {
     const regex = new RegExp(middleware.escapeRegex(req.query.search), "gi");
     checkQuery = true;
 
-    tspot.find({ name: regex }, function (err, allTSpots) {
-      if (err) {
-        console.log("Some error occured while traversing database!");
-        res.redirect("back");
-      } else {
-        if (allTSpots.length < 1) {
-          noMatch =
-            "No Exploration Points match that query, please try again with some different names.";
-        }
-        res.render("touristspots/index", {
-          tspots: allTSpots,
-          noMatch: noMatch,
-          checkQuery: checkQuery,
+    tspot
+      .find({ name: regex })
+      .skip(perPage * pageNumber - perPage)
+      .limit(perPage)
+      .exec(function (err, allTSpots) {
+        tspot.count({ name: regex }).exec(function (err, count) {
+          if (err) {
+            console.log("Some error occured while traversing database!");
+            res.redirect("back");
+          } else {
+            if (allTSpots.length < 1) {
+              noMatch =
+                "No Exploration Points match that query, please try again with some different names.";
+            }
+            res.render("touristspots/index", {
+              tspots: allTSpots,
+              current: pageNumber,
+              pages: Math.ceil(count / perPage),
+              noMatch: noMatch,
+              checkQuery: checkQuery,
+              search: req.query.search,
+            });
+          }
         });
-      }
-    });
+      });
   } else {
     // Get all Exploration Points from DB
-    tspot.find({}, (err, allTSpots) => {
-      if (err) {
-        console.log("Some error occured while traversing database!");
-      } else {
-        res.render("touristspots/index", {
-          tspots: allTSpots,
-          noMatch: noMatch,
-          checkQuery: checkQuery,
+    tspot
+      .find({})
+      .skip(perPage * pageNumber - perPage)
+      .limit(perPage)
+      .exec(function (err, allTSpots) {
+        tspot.count().exec(function (err, count) {
+          if (err) {
+            console.log("Some error occured while traversing database!");
+          } else {
+            res.render("touristspots/index", {
+              tspots: allTSpots,
+              current: pageNumber,
+              pages: Math.ceil(count / perPage),
+              noMatch: noMatch,
+              checkQuery: checkQuery,
+              search: false,
+            });
+          }
         });
-      }
-    });
+      });
   }
 });
 
