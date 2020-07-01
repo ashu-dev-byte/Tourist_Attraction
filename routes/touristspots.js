@@ -18,6 +18,7 @@ router.get("/", function (req, res) {
 
     tspot
       .find({ name: regex })
+      .sort({ createdAt: -1 })
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
       .exec((err, allTSpots) => {
@@ -45,6 +46,7 @@ router.get("/", function (req, res) {
     // Get all Exploration Points from DB
     tspot
       .find({})
+      .sort({ createdAt: -1 })
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
       .exec(function (err, allTSpots) {
@@ -98,14 +100,14 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     }
   });
   req.flash("success", "Added Exploration Point.");
-  res.redirect("/touristspots/NewExpo");
+  res.redirect("/touristspots");
 });
 
 //Find and Render Specific Exploration Point
 router.get("/:id", (req, res) => {
   tspot
     .findById(req.params.id)
-    .populate("comments")
+    .populate({ path: "comments", options: { sort: { createdAt: -1 } } })
     .exec((err, specificSpot) => {
       if (err) {
         console.log("Some error occured while showing this tSpot.\n" + err);
