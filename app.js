@@ -6,7 +6,7 @@ const flash = require("connect-flash");
 const user = require("./models/user");
 const passport = require("passport");
 const mongoose = require("mongoose");
-const seedDB = require("./seeds");
+// const seedDB = require("./seeds");
 const express = require("express");
 const app = express();
 

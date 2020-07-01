@@ -13,27 +13,27 @@ function seedDB() {
       console.log("Error occured while emptying database!");
     } else {
       console.log("Database removed!");
-      data.forEach((seed) => {
-        tspot.create(seed, (err, datum) => {
-          if (err) {
-            console.log("Error while seeding database!");
-          } else {
-            console.log("Added a exploration point");
+      // data.forEach((seed) => {
+      //   tspot.create(seed, (err, datum) => {
+      //     if (err) {
+      //       console.log("Error while seeding database!");
+      //     } else {
+      //       console.log("Added a exploration point");
 
-            // comment.create(cmt, (err, com) => {
-            //   if (err) {
-            //     console.log("Error while seeding comment!");
-            //   } else {
-            //     datum.comments.push(com);
-            //     datum.save();
-            //     console.log("Added a comment!");
-            //     //console.log(datum);
-            //   }
-            // });
-          }
-        });
-      });
-      console.log("Adding Database...");
+      //       comment.create(cmt, (err, com) => {
+      //         if (err) {
+      //           console.log("Error while seeding comment!");
+      //         } else {
+      //           datum.comments.push(com);
+      //           datum.save();
+      //           console.log("Added a comment!");
+      //           //console.log(datum);
+      //         }
+      //       });
+      //     }
+      //   });
+      // });
+      // console.log("Adding Database...");
     }
   });
 }
