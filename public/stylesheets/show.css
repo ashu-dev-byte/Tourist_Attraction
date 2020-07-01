@@ -47,9 +47,22 @@ img {
   font-weight: bold;
 }
 
+.expo-auth-name {
+  background-color: rgb(17, 143, 182);
+  border-radius: 13.5px;
+  padding: 4px 27.5px;
+  color: whitesmoke;
+}
+
 .auth-name {
   color: #cc5500;
+  margin-left: 5px;
   font-size: 18px;
+}
+
+.cm-text {
+  margin-left: 8px;
+  font-size: 20px;
 }
 
 .lead {

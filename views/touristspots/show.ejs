@@ -147,9 +147,16 @@
                 <span class="float-right span-text">
                   <%=moment(comment.createdAt).fromNow()%>
                 </span>
+                <% if(specificSpot.author.id.equals(comment.author.id)) { %>
+                <strong class="expo-auth-name"
+                  ><%= comment.author.username %>
+                  <i class="fa">&#xf058;</i></strong
+                >
+                <% } else {%>
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >
+                <% } %>
                 <p class="cm-text"><%- comment.text %></p>
               </div>
             </div>
