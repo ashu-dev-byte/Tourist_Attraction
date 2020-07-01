@@ -6,7 +6,7 @@ let middlewareObject = {};
 middlewareObject.checkExpoPointOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {
     tspot.findById(req.params.id, (err, foundSpot) => {
-      if (err) {
+      if (err || !foundSpot) {
         console.log("Error while showing Edit Explorating Point Page!!");
         req.flash("error", "Exploration Point not found.");
         res.redirect("/touristspots");
@@ -29,8 +29,10 @@ middlewareObject.checkExpoPointOwnership = function (req, res, next) {
 middlewareObject.checkCommentOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {
     commentDB.findById(req.params.comment_id, (err, foundComment) => {
-      if (err) {
+      if (err || !foundComment) {
         res.redirect("back");
+        req.flash("error", "Comment not found!");
+        res.redirect("/touristSpots/" + req.params.id);
       } else {
         if (foundComment.author.id.equals(req.user._id)) {
           return next();

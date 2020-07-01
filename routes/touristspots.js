@@ -109,9 +109,11 @@ router.get("/:id", (req, res) => {
     .findById(req.params.id)
     .populate({ path: "comments", options: { sort: { createdAt: -1 } } })
     .exec((err, specificSpot) => {
-      if (err) {
+      if (err || !specificSpot) {
         console.log("Some error occured while showing this tSpot.\n" + err);
-        console.log(specificSpot);
+        req.flash("error", "Exploration Point not found!");
+        res.redirect("/touristSpots");
+        //console.log(specificSpot);
       } else {
         console.log("Rendered this tSpot.\n");
         //console.log(specificSpot);

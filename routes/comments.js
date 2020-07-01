@@ -55,9 +55,10 @@ router.get(
   (req, res) => {
     tspot.findById(req.params.id, (err, specificSpot) => {
       commentDB.findById(req.params.comment_id, (err, gotComment) => {
-        if (err) {
+        if (err || !gotComment) {
           console.log(err);
-          res.redirect("back");
+          req.flash("error", "Comment not found!");
+          res.redirect("/touristSpots/" + req.params.id);
         } else {
           res.render("comments/edit", {
             specificSpot: specificSpot,

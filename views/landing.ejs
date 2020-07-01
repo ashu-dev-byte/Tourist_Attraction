@@ -17,11 +17,11 @@
     <div class="container">
       <% if(errorFlash && errorFlash.length > 0){ %>
       <div class="alert alert-danger" role="alert">
-        <%= error %>
+        <%= errorFlash %>
       </div>
       <% } %> <% if(successFlash && successFlash.length > 0){ %>
       <div class="alert alert-success" role="alert">
-        <%= success %>
+        <%= successFlash %>
       </div>
       <% } %>
     </div>
