@@ -152,12 +152,13 @@
                   ><%= comment.author.username %>
                   <i class="fa">&#xf058;</i></strong
                 >
+                <p class="cm-text"><%- comment.text %></p>
                 <% } else {%>
                 <strong class="auth-name"
                   ><%= comment.author.username %>:</strong
                 >
+                <p class="cm-text-non"><%- comment.text %></p>
                 <% } %>
-                <p class="cm-text"><%- comment.text %></p>
               </div>
             </div>
             <% }) %>

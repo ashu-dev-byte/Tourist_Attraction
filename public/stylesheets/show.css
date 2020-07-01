@@ -61,7 +61,13 @@ img {
 }
 
 .cm-text {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.cm-text-non {
   margin-left: 8px;
+  margin-top: -7.5px;
   font-size: 20px;
 }
 
