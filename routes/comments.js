@@ -55,16 +55,10 @@ router.get(
   (req, res) => {
     tspot.findById(req.params.id, (err, specificSpot) => {
       commentDB.findById(req.params.comment_id, (err, gotComment) => {
-        if (err || !gotComment) {
-          console.log(err);
-          req.flash("error", "Comment not found!");
-          res.redirect("/touristSpots/" + req.params.id);
-        } else {
-          res.render("comments/edit", {
-            specificSpot: specificSpot,
-            gotComment: gotComment,
-          });
-        }
+        res.render("comments/edit", {
+          specificSpot: specificSpot,
+          gotComment: gotComment,
+        });
       });
     });
   }
@@ -78,7 +72,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
     (err, gotComment) => {
       if (err) {
         console.log("Error while updating Comment!!");
-        res.redirect("back");
+        res.redirect("/touristspots/" + req.params.id);
       } else {
         console.log("Updated Comment!!");
         req.flash("success", "Edited comment.");

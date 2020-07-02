@@ -21,30 +21,38 @@ middlewareObject.checkExpoPointOwnership = function (req, res, next) {
     });
   } else {
     req.flash("error", "You need to be logged in to do that.");
-    res.redirect("back");
+    res.redirect("/touristspots/" + req.params.id);
   }
 };
 
 // For Checking Ownership of Comments
 middlewareObject.checkCommentOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {
-    commentDB.findById(req.params.comment_id, (err, foundComment) => {
-      if (err || !foundComment) {
-        res.redirect("back");
-        req.flash("error", "Comment not found!");
-        res.redirect("/touristSpots/" + req.params.id);
+    tspot.findById(req.params.id, (err, foundSpot) => {
+      if (err || !foundSpot) {
+        console.log("Explorating Point not found!!");
+        req.flash("error", "Exploration Point not found.");
+        res.redirect("/touristspots");
       } else {
-        if (foundComment.author.id.equals(req.user._id)) {
-          return next();
-        } else {
-          req.flash("error", "You don't have permission to do that.");
-          res.redirect("back");
-        }
+        commentDB.findById(req.params.comment_id, (err, foundComment) => {
+          if (err || !foundComment) {
+            console.log("Comment not found!!");
+            req.flash("error", "Comment not found!");
+            res.redirect("/touristSpots/" + foundSpot._id);
+          } else {
+            if (foundComment.author.id.equals(req.user._id)) {
+              return next();
+            } else {
+              req.flash("error", "You don't have permission to do that.");
+              res.redirect("/touristspots/" + foundSpot._id);
+            }
+          }
+        });
       }
     });
   } else {
     req.flash("error", "You need to be logged in to do that.");
-    res.redirect("back");
+    res.redirect("/touristspots/" + req.params.id);
   }
 };
 
