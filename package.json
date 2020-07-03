@@ -4,7 +4,8 @@
   "description": "Get all travel information,tourist attractions,travel destinations,food, festivals and many more.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
