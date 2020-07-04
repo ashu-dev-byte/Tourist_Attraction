@@ -7,6 +7,7 @@ const user = require("./models/user");
 const passport = require("passport");
 const mongoose = require("mongoose");
 // const seedDB = require("./seeds");
+require("dotenv").config();
 const express = require("express");
 const app = express();
 
@@ -16,15 +17,13 @@ const indexRoutes = require("./routes/index");
 app.locals.moment = require("moment");
 
 // mongodb://localhost/touristSpots
-mongoose.connect(
-  "mongodb+srv://Ashutosh:securepassword@exploration-point.1kpnb.mongodb.net/touristSpots?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+// mongodb+srv://Ashutosh:securepassword@exploration-point.1kpnb.mongodb.net/touristSpots?retryWrites=true&w=majority
+mongoose.connect(process.env.DBURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
