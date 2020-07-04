@@ -50,14 +50,14 @@ img {
 .expo-auth-name {
   background-color: rgb(17, 143, 182);
   border-radius: 13.5px;
-  margin-left: 5px;
-  padding: 4px 14.5px;
+  margin-left: 0px;
+  padding: 4px 11.5px;
   color: whitesmoke;
 }
 
 .auth-name {
   color: #cc5500;
-  margin-left: 5px;
+  margin-left: 10px;
   font-size: 18px;
 }
 
@@ -67,7 +67,7 @@ img {
 }
 
 .cm-text-non {
-  margin-left: 8px;
+  margin-left: 11px;
   margin-top: -7.5px;
   font-size: 20px;
 }
