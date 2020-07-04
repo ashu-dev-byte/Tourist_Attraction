@@ -21,6 +21,8 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   }
 );
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -61,6 +63,6 @@ app.get("*", (req, res) => {
   res.render("notFound");
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, process.env.IP, () => {
   console.log("The server has started at port 3000.");
 });
