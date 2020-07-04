@@ -1,0 +1,96 @@
+.jumbotron {
+  margin-top: -20px;
+}
+
+.index-h3 {
+  text-align: center;
+  font-size: 38px;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+.card-populate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.index-card {
+  height: 375px;
+  width: 82.5%;
+  margin: 10px;
+  background-color: #f7f7f7;
+}
+
+.index-card .card-img-top {
+  height: 58.5%;
+  object-fit: cover;
+}
+
+.index-card .card-text {
+  color: dodgerblue;
+  font-size: 16.6px;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: -10px;
+}
+
+.index-card .card-body a {
+  position: absolute;
+  width: 85%;
+  bottom: 15px;
+}
+
+.fuzzy-search {
+  margin: 1px 30px 350px 30px;
+}
+
+.fuzzy-search h3 {
+  color: rgb(247, 78, 48);
+}
+
+.check-query {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto 40px auto;
+}
+
+@media screen and (min-width: 768px) {
+  .index-card {
+    width: 340px !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .index-card {
+    width: 340px !important;
+  }
+
+  .index-card:nth-of-type(2n + 1) {
+    margin-left: 10% !important;
+  }
+
+  .index-card:nth-of-type(2n + 2) {
+    margin-left: 10% !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .index-card:nth-of-type(3n + 1) {
+    margin-left: 2% !important;
+  }
+
+  .index-card:nth-of-type(3n + 2) {
+    margin-left: 3.5% !important;
+  }
+
+  .index-card:nth-of-type(3n + 3) {
+    margin-left: 3.5% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-populate {
+    justify-content: space-around;
+  }
+}

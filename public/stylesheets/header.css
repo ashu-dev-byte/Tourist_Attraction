@@ -33,7 +33,7 @@ body {
 
 .navbar-nav li a {
   color: orange !important;
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .user-nav {
@@ -48,6 +48,7 @@ body {
   background-color: dimgray;
   border: none;
   width: 9.2rem !important;
+  height: 2.2rem !important;
   transition: width 0.4s ease-in-out;
 }
 
@@ -78,18 +79,12 @@ body {
   background-color: rgb(255, 175, 70);
 } */
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1200px) {
   .navbar-nav {
     margin-top: 25px;
   }
 
   .navbar-brand {
     font-size: 25px !important;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .index-card {
-    width: 340px !important;
   }
 }

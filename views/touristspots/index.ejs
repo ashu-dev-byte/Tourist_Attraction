@@ -18,69 +18,37 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h3 style="text-align: center; font-size: 38px; margin-bottom: 30px;">
+      <h3 class="index-h3">
         Our Most Popular Destinations
       </h3>
     </div>
 
-    <div
-      class="row text-center"
-      style="display: flex; flex-wrap: wrap; justify-content: flex-start;"
-    >
+    <div class="row text-center card-populate">
       <% tspots.forEach((tspot) => { %>
 
-      <div
-        class="card index-card"
-        style="
-          height: 375px;
-          width: 82.5%;
-          margin: 10px;
-          background-color: #f7f7f7;
-        "
-      >
-        <img
-          class="card-img-top"
-          src="<%= tspot.imageURL %>"
-          style="height: 58.5%; object-fit: cover;"
-        />
+      <div class="card index-card">
+        <img class="card-img-top" src="<%= tspot.imageURL %>" />
         <div class="card-body">
           <h4 class="card-title"><%= tspot.name %></h4>
-          <p
-            class="card-text text-center"
-            style="
-              color: dodgerblue;
-              font-size: 16.6px;
-              font-weight: bold;
-              font-style: italic;
-              margin-top: -10px;
-            "
-          >
+          <p class="card-text text-center">
             <%= tspot.city %>
           </p>
           <a
             href="/touristspots/<%= tspot._id %>"
             class="btn btn-warning btn-block"
-            style="position: absolute; width: 85%; bottom: 15px;"
             >More info</a
           >
         </div>
       </div>
 
       <%}); %> <% if(noMatch !== null) { %>
-      <div class="container" style="margin: 1px 30px 350px 30px;">
-        <h3 style="color: rgb(247, 78, 48);"><%= noMatch %></h3>
+      <div class="container fuzzy-search">
+        <h3><%= noMatch %></h3>
       </div>
       <% } %>
     </div>
     <% if(checkQuery) { %>
-    <div
-      class="container"
-      style="
-        display: flex;
-        justify-content: space-around;
-        margin: 20px auto 40px auto;
-      "
-    >
+    <div class="container check-query">
       <a href="/touristSpots" class="btn btn-lg btn-primary">Go Back</a>
     </div>
     <% } %>
