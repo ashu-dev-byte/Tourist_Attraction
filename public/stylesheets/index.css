@@ -17,7 +17,7 @@
 
 .index-card {
   height: 375px;
-  width: 82.5%;
+  width: 340px !important;
   margin: 10px;
   background-color: #f7f7f7;
 }
@@ -55,11 +55,11 @@
   margin: 20px auto 40px auto;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .index-card {
     width: 340px !important;
   }
-}
+} */
 
 @media screen and (min-width: 992px) {
   .index-card {
@@ -92,5 +92,9 @@
 @media screen and (max-width: 768px) {
   .card-populate {
     justify-content: space-around;
+  }
+
+  .index-card {
+    width: 82.5%;
   }
 }
