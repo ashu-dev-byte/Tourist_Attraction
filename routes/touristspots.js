@@ -22,7 +22,7 @@ router.get("/", function (req, res) {
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
       .exec((err, allTSpots) => {
-        tspot.count({ name: regex }).exec((err, count) => {
+        tspot.countDocuments({ name: regex }).exec((err, count) => {
           if (err) {
             console.log("Some error occured while traversing database!");
             res.redirect("back");
@@ -50,7 +50,7 @@ router.get("/", function (req, res) {
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
       .exec(function (err, allTSpots) {
-        tspot.count().exec((err, count) => {
+        tspot.countDocuments().exec((err, count) => {
           if (err) {
             console.log("Some error occured while traversing database!");
           } else {
