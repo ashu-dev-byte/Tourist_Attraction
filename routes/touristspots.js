@@ -17,30 +17,34 @@ router.get("/", function (req, res) {
     checkQuery = true;
 
     tspot
-      .find({ name: regex })
+      .find({ $or: [{ name: regex }, { city: regex }, { owner: regex }] })
       .sort({ createdAt: -1 })
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
       .exec((err, allTSpots) => {
-        tspot.countDocuments({ name: regex }).exec((err, count) => {
-          if (err) {
-            console.log("Some error occured while traversing database!");
-            res.redirect("back");
-          } else {
-            if (allTSpots.length < 1) {
-              noMatch =
-                "No Exploration Points match that query, please try again with some different names.";
+        tspot
+          .countDocuments({
+            $or: [{ name: regex }, { city: regex }, { owner: regex }],
+          })
+          .exec((err, count) => {
+            if (err) {
+              console.log("Some error occured while traversing database!");
+              res.redirect("back");
+            } else {
+              if (allTSpots.length < 1) {
+                noMatch =
+                  "No Exploration Points match that query, please try again with some different names.";
+              }
+              res.render("touristspots/index", {
+                tspots: allTSpots,
+                current: pageNumber,
+                pages: Math.ceil(count / perPage),
+                noMatch: noMatch,
+                checkQuery: checkQuery,
+                search: req.query.search,
+              });
             }
-            res.render("touristspots/index", {
-              tspots: allTSpots,
-              current: pageNumber,
-              pages: Math.ceil(count / perPage),
-              noMatch: noMatch,
-              checkQuery: checkQuery,
-              search: req.query.search,
-            });
-          }
-        });
+          });
       });
   } else {
     // Get all Exploration Points from DB
@@ -77,6 +81,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 router.post("/", middleware.isLoggedIn, (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
+  let owner = req.user.username;
   let imageURL = req.body.imageURL;
   let description = req.sanitize(req.body.description);
   var author = {
@@ -86,6 +91,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   let newSpot = {
     name: name,
     city: city,
+    owner: owner,
     imageURL: imageURL,
     description: description,
     author: author,
@@ -156,3 +162,5 @@ router.delete("/:id", middleware.checkExpoPointOwnership, (req, res) => {
 });
 
 module.exports = router;
+
+// { $or: [ { name: regex }, { city: regex }, { author.username: regex }  ] }
