@@ -16,8 +16,6 @@ const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
 app.locals.moment = require("moment");
 
-// mongodb://localhost/touristSpots
-// mongodb+srv://Ashutosh:securepassword@exploration-point.1kpnb.mongodb.net/touristSpots?retryWrites=true&w=majority
 mongoose.connect(process.env.DBURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
