@@ -40,8 +40,20 @@
           >
         </div>
       </div>
+      <%}); %>
+      <!-- To make space around -->
 
-      <%}); %> <% if(noMatch !== null) { %>
+      <% if(num % 3 == 1) { %>
+      <div class="card index-card ghost-card-one">one</div>
+      <div class="card index-card ghost-card-two">two</div>
+      <% } else if(num % 3 == 2) { %>
+      <div class="card index-card ghost-card-three">three</div>
+      <% } else { %>
+      <div class="card index-card ghost-card-four">four</div>
+      <% } %>
+
+      <!-- Next Part -->
+      <% if(noMatch !== null) { %>
       <div class="container fuzzy-search">
         <h3><%= noMatch %></h3>
       </div>

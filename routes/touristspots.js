@@ -38,6 +38,7 @@ router.get("/", function (req, res) {
               res.render("touristspots/index", {
                 tspots: allTSpots,
                 current: pageNumber,
+                num: count,
                 pages: Math.ceil(count / perPage),
                 noMatch: noMatch,
                 checkQuery: checkQuery,
@@ -61,6 +62,7 @@ router.get("/", function (req, res) {
             res.render("touristspots/index", {
               tspots: allTSpots,
               current: pageNumber,
+              num: count,
               pages: Math.ceil(count / perPage),
               noMatch: noMatch,
               checkQuery: checkQuery,
