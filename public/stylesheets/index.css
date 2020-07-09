@@ -108,4 +108,12 @@
   .ghost-card-two {
     display: none;
   }
+
+  .ghost-card-three {
+    display: none;
+  }
+
+  .ghost-card-four {
+    display: none;
+  }
 }
