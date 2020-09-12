@@ -6,9 +6,8 @@ const flash = require("connect-flash");
 const user = require("./models/user");
 const passport = require("passport");
 const mongoose = require("mongoose");
-// const seedDB = require("./seeds");
-require("dotenv").config();
 const express = require("express");
+require("dotenv").config();
 const app = express();
 
 const touristspotsRoutes = require("./routes/touristspots");
