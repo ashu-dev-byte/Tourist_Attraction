@@ -15,7 +15,7 @@ const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
 app.locals.moment = require("moment");
 
-mongoose.connect(process.env.DBURL, {
+mongoose.connect(process.env.HOSTED_MDB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -59,6 +59,6 @@ app.get("*", (req, res) => {
   res.render("notFound");
 });
 
-app.listen(process.env.PORT || 3000, process.env.IP, () => {
-  console.log("The server has started at port 3000.");
+app.listen(process.env.PORT || 9000, process.env.IP, () => {
+  console.log("The server has started at port 9000.");
 });

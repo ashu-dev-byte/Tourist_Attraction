@@ -21,6 +21,7 @@
   width: 340px !important;
   margin: 10px;
   background-color: #f7f7f7;
+  box-shadow: 1px 1px 5px 0px rgba(99, 101, 102, 0.51);
 }
 
 .index-card .card-img-top {

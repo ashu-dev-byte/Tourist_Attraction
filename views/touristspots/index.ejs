@@ -18,9 +18,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h3 class="index-h3">
-        Our Most Popular Destinations
-      </h3>
+      <h3 class="index-h3">Our Most Popular Destinations</h3>
     </div>
 
     <div class="row text-center card-populate">
@@ -30,9 +28,7 @@
         <img class="card-img-top" src="<%= tspot.imageURL %>" />
         <div class="card-body">
           <h4 class="card-title"><%= tspot.name %></h4>
-          <p class="card-text text-center">
-            <%= tspot.city %>
-          </p>
+          <p class="card-text text-center"><%= tspot.city %></p>
           <a
             href="/touristspots/<%= tspot._id %>"
             class="btn btn-warning btn-block"
@@ -66,7 +62,7 @@
     <% } %>
   </div>
 
-  <nav aria-label="Page navigation" style="margin: 200px auto 35px auto;">
+  <nav aria-label="Page navigation" style="margin: 200px auto 35px auto">
     <% if (pages && pages > 0) { %>
     <ul class="pagination justify-content-center">
       <% if (current == 1) { %>
