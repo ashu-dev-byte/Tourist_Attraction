@@ -15,7 +15,7 @@ const commentRoutes = require("./routes/comments");
 const indexRoutes = require("./routes/index");
 app.locals.moment = require("moment");
 
-mongoose.connect(process.env.HOSTED_MDB_URL, {
+mongoose.connect(process.env.HOSTED_DBURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
