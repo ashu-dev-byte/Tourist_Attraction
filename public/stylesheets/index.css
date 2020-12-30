@@ -19,7 +19,7 @@
 .index-card {
   height: 375px;
   width: 340px !important;
-  margin: 10px;
+  margin: 20px 20px;
   background-color: #f7f7f7;
   box-shadow: 1px 1px 5px 0px rgba(99, 101, 102, 0.51);
 }
