@@ -59,6 +59,6 @@ app.get("*", (req, res) => {
   res.render("notFound");
 });
 
-app.listen(process.env.PORT || 9000, process.env.IP, () => {
-  console.log("The server has started at port 9000.");
+app.listen(process.env.PORT || 9786, process.env.IP, () => {
+  console.log("The server has started at port 9786.");
 });
